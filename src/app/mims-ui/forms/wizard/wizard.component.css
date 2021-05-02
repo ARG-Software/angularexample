@@ -1,0 +1,46 @@
+.clr-wizard--inline .modal {
+    padding: 0;
+    display:flex;
+  }
+  
+  .clr-wizard--inline .modal .modal-dialog {
+    width: 100%;
+    height: 100%;
+    z-index: auto; 
+  }
+  
+  .clr-wizard--inline .modal-content {
+    padding: 0;
+    height: 100%;
+    box-shadow: none; 
+  }
+  
+  .clr-wizard--inline .modal-dialog .modal-content .modal-body {
+    height: 100%; 
+  }
+  
+  .clr-wizard--inline .modal .content-container {
+    height: 100%;
+  }
+  
+  .clr-wizard--inline .nav.navList {
+    padding-top: 0; 
+  }
+  
+  .clr-wizard--inline .modal .content-container .nav-panel {
+    width: 99%;
+    height: 99%; 
+  }
+  
+  .clr-wizard--inline .modal-dialog .modal-content .modal-body .content-area {
+    overflow-y: auto; 
+  }
+  
+  .clr-wizard--inline .modal-backdrop {
+    height: 0;
+    width: 0; 
+  }
+
+  .clr-wizard--inline .modal-dialog  .modal-nav{
+      height: -webkit-fill-available!important;
+  }

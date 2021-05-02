@@ -1,0 +1,20 @@
+.vertical-navbar-container{
+  height: 100%;
+}
+
+.colour{
+  background-color:#eee;
+  font-weight: 0;
+}
+
+.second-level-menu{
+  padding: 0rem 0.5rem 0rem 1rem!important;
+}
+
+.third-level-menu{
+  padding: 0rem 1rem 0rem 2rem!important;
+}
+
+.clickable-element{ 
+  cursor: pointer; 
+}

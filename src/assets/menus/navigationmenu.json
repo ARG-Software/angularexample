@@ -1,0 +1,15 @@
+{
+    "settings": 
+      {
+        "name": "Mims",
+        "icon": "mims-icon"
+      }
+    ,
+    "contextMenu": [
+      {
+        "name": "Logout",
+        "url": "/logout"
+      }
+    ]
+}
+

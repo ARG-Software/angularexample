@@ -1,0 +1,7 @@
+<ng-container [ngSwitch]="buttontype">
+  <button *ngSwitchCase="'success'" class="btn btn-success-outline">{{value}}</button>
+  <button *ngSwitchCase="'info'" class="btn btn-info-outline">{{value}}</button>
+  <button *ngSwitchCase="'warning'" class="btn btn-warning-outline">{{value}}</button>
+  <button *ngSwitchCase="'danger'" class="btn btn-danger-outline">{{value}}</button>
+  <button *ngSwitchDefault class="btn btn-outline">{{value}}</button>
+</ng-container>

@@ -1,0 +1,25 @@
+.card-body-text{
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+.no-margin-top{
+  margin-top:0;
+}
+
+.push-to-top{
+  margin-top: -23px;
+}
+
+.align-left{
+  float: left;
+  width: 50%;
+}
+
+.align-right{
+  text-align: right;
+}
+
+.opacity{
+  opacity: 0.3;
+}

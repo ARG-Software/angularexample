@@ -1,0 +1,12 @@
+<clr-alert [clrAlertSizeSmall]="isSmall" [clrAlertClosable]="closable" 
+  [clrAlertType]="type" [clrAlertAppLevel]="appLevel">
+  <div class="alert-item">
+      <span class="alert-text">
+        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+      </span>
+  </div>
+</clr-alert>
+
+<ng-template #contentTemplate>
+    <ng-content></ng-content>
+</ng-template>

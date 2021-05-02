@@ -1,0 +1,16 @@
+<div class="vertical-chart-bar-container">
+  <div *ngIf="hasContent"> <!-- IF THIS 'DIV' IS REMOVED, THE COMPONENT BREAKS, BUT IT STAYS CONTAINED WITHIN ITS BOOSTRAP GRID -->
+  <ngx-charts-bar-vertical-normalized 
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="multi"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [autoScale]="true"
+        [xAxisLabel]="xAxisLabel">
+   </ngx-charts-bar-vertical-normalized>
+  </div>
+</div>

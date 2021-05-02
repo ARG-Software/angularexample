@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-header">
+        {{ headerText }}
+    </div>
+    <div class="card-block">
+        <div class="card-img">
+            <img src="{{imgUrl}}">
+        </div>
+    </div>
+    <div class="card-footer" *ngIf="selectBoxData.length > 0">
+        <mims-select-box [data]="selectBoxData"
+                         (changed)="selectedItem($event)">
+        </mims-select-box>
+    </div>
+</div>

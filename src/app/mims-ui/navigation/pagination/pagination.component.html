@@ -1,0 +1,47 @@
+<ul class="pagination-list">
+
+  <!-- GO PREVIOUS -->
+  
+  <li *ngIf="page > 1">
+    <button
+        type="button"
+        class="pagination-previous" 
+        (click)="changePage(page-1)"
+        type="button"></button>
+  </li>
+
+    <!-- GO FIRST -->
+
+    <li *ngIf="page > 2">
+      <button (click)="changePage(1)" type="button">1</button>
+    </li>
+    
+    <li *ngIf="page > 3">...</li>
+  
+   <li *ngFor="let pageNum of middlePages" [class.pagination-current]="pageNum === page">
+    <button 
+        *ngIf="pageNum !== page; else noButton" 
+        (click)="changePage(pageNum)"
+        type="button">{{pageNum}}</button>
+    <ng-template #noButton>{{pageNum}}</ng-template>
+   </li>
+
+  
+  <!-- GO LAST -->
+  <li *ngIf="page < totalPages - 2">...</li>
+    <li *ngIf="page < totalPages - 1">
+      <button 
+          (click)="changePage(totalPages)"
+          type="button">{{totalPages}}</button>
+    </li>
+
+    <!-- GO NEXT -->
+    <li *ngIf="page < totalPages">
+      <button 
+          class="pagination-next" 
+          (click)="changePage(page+1)"
+          type="button"></button>
+    </li>
+
+
+</ul>

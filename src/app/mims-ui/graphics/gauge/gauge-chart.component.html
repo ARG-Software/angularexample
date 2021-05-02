@@ -1,0 +1,12 @@
+<ngx-charts-gauge
+        [view]="gaugeData.view"
+        [scheme]="gaugeData.colorScheme"
+        [results]="gaugeData.results"
+        [min]="gaugeData.min"
+        [max]="gaugeData.max"
+        [angleSpan]="gaugeData.angleSpan"
+        [startAngle]="gaugeData.startAngle"
+        [showAxis]="gaugeData.showAxis"
+        [valueFormatting]="valueFormatting">
+</ngx-charts-gauge>
+<mims-label [text]="gaugeData.legend"></mims-label>

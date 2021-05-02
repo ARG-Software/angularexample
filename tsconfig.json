@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "removeComments": true,
+    "strictNullChecks": false,
+    "baseUrl": ".",
+    "lib": ["es6", "dom"],
+    "paths": {
+      "@angular/*": ["node_modules/@angular/*"],
+      "@api/*": ["src/app/api/*"],
+      "@mimsUI/*": ["src/app/mims-ui/*"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "types": ["node", "uglify-js", "faker","webpack"],
+    "declaration": false
+  },
+  "exclude": [
+    "node_modules",
+    "env",
+    "config",
+    "webpack",
+    "build",
+    "bin",
+    "obj",
+    "Properties"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false
+}

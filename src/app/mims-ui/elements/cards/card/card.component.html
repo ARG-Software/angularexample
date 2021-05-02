@@ -1,0 +1,26 @@
+<div class="card no-margin-top">
+      <div class="card-block" [ngStyle]=" { 'background-color': (backgroundColour) !== null ? backgroundColour : 'default'}">
+      <!--top-->
+        <div class="push-to-top" >
+          <div class="align-left">
+              <h5 class="card-title" [ngStyle]="{'color': (titleColour) !== null ? titleColour : 'default'}"> {{ title }}</h5>
+          </div>
+          <div class="opacity align-right">
+              <h5 class="" [ngStyle]="{'color': (topRightTitleColor) !== null ? topRightTitleColor : 'default'}"> {{ topRightTitle }}</h5>
+          </div>
+        </div>
+
+        <!--mid-->
+        <div class="align-left">
+            <h1 class="card-text card-body-text " [ngStyle]="{'color': (textColour) !== null ? textColour : 'default'}"> {{ text }} </h1>
+        </div>
+        <div class="align-right">
+            <h5 [ngStyle]="{'color': (midRightTitleColor) !== null ? midRightTitleColor : 'default'}"> {{ midRightTitle }}</h5>
+        </div>
+
+        <!--bottom-->
+        <div>
+            <mims-button-outline [buttontype]="'info'" [value]="buttonText"></mims-button-outline>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<ng-container *ngIf="type!='textarea';else textareatemplate">
+<input [ngStyle]="setFullWidthStyleIfRequired()" class="block-display" id="{{id}}"
+           [attr.type]="type!=null?type:'text'"
+           [attr.disabled]="disable ? 'disabled' : null"
+           [attr.size]="size"
+           [(ngModel)]="value"
+           #txt="ngModel"
+           placeholder="{{placeholder}}"/>
+</ng-container>
+
+<ng-template #textareatemplate>
+    <textarea [ngStyle]="setFullWidthStyleIfRequired()"
+    [attr.disabled]="disable ? 'disabled' : null" 
+    [(ngModel)]="value" 
+    #txt="ngModel"
+    rows="size">
+  </textarea>
+</ng-template>

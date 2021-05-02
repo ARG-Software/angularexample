@@ -1,0 +1,13 @@
+﻿.awcache
+.idea
+.vscode
+node_modules
+obj
+Properties
+wwwroot
+bin
+npm-debug.*
+src/*.js
+src/*.map
+dist
+*.orig

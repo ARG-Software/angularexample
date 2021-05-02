@@ -1,0 +1,18 @@
+<clr-wizard #wizard [clrWizardOpen]="true" [clrWizardSize]="'sm'"
+    [clrWizardForceForwardNavigation]="orderedNavigation"
+    [clrWizardPreventDefaultCancel]="true"
+    [clrWizardDisableStepnav]="disableNavigation" 
+class="clr-wizard--inline">
+    <clr-wizard-title>{{wizardTitle}}</clr-wizard-title>
+    <clr-wizard-button [hidden]="!hasBack" [type]="'previous'">Back</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+    <clr-wizard-button [hidden]="!hasCancel" [type]="'cancel'">Cancel</clr-wizard-button>
+    <clr-wizard-button [type]="'custom-finish'" (click)="onFinish($event)">Done</clr-wizard-button>    
+    <ng-container *ngFor="let page of wizardPageMetaData;let i = index;">
+            <clr-wizard-page id="{{page.Id}}" [clrWizardPagePreventDefaultNext]="true" 
+                (clrWizardPageOnCommit)="onNext($event)">
+                <ng-template clrPageTitle>{{page.Title}}</ng-template>
+                <ng-container *ngTemplateOutlet="wizardPageTemplate[i]"></ng-container>
+            </clr-wizard-page>        
+    </ng-container>
+</clr-wizard>

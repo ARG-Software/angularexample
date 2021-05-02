@@ -1,0 +1,7 @@
+<ng-container [ngSwitch]="spinnertype">
+    <div class="spinner-position">
+            <span *ngSwitchCase="'inline'" class="spinner spinner-inline">{{value}}</span>
+            <span *ngSwitchDefault class="spinner">{{value}}</span>
+    </div>
+    <div class="overlay" *ngIf="background"></div>
+</ng-container>
