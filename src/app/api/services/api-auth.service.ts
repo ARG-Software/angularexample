@@ -7,18 +7,24 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class ApiAuthService {
+  private readonly appConfigurations: IAppConfig;
+  private readonly refreshTokenUrl: string;
+  private readonly accessTokenKey: string;
+  private readonly refreshTokenKey: string;
 
-    private readonly appConfigurations: IAppConfig;
-    private readonly refreshTokenUrl: string;
-    private readonly accessTokenKey: string;
-    private readonly refreshTokenKey: string;
-
-    constructor(private environment: GlobalEnvironmentService, private injector: Injector, private router: Router, private http: HttpClient) {
-        this.appConfigurations = injector.get(APP_CONFIG);
-        this.refreshTokenUrl = this.environment.getApiUrl() + this.appConfigurations.refreshTokenEndPoint;
-        this.accessTokenKey = this.appConfigurations.accessTokenKey;
-        this.refreshTokenKey = this.appConfigurations.refreshTokenKey;
-    }
+  constructor(
+    private environment: GlobalEnvironmentService,
+    private injector: Injector,
+    private router: Router,
+    private http: HttpClient
+  ) {
+    this.appConfigurations = injector.get(APP_CONFIG);
+    this.refreshTokenUrl =
+      this.environment.getApiUrl() +
+      this.appConfigurations.refreshTokenEndPoint;
+    this.accessTokenKey = this.appConfigurations.accessTokenKey;
+    this.refreshTokenKey = this.appConfigurations.refreshTokenKey;
+  }
 
   public getAccessToken(): string {
     return localStorage.getItem(this.accessTokenKey);
@@ -35,18 +41,19 @@ export class ApiAuthService {
   public addAuthHeader(request: HttpRequest<any>): HttpRequest<any> {
     request = request.clone({
       setHeaders: {
-          Authorization: `Bearer ${this.getAccessToken()}`
-      }
-    } );
+        Authorization: `Bearer ${this.getAccessToken()}`,
+      },
+    });
     return request;
   }
 
   public getNewAccessToken(): Observable<any> {
-    const headers = new HttpHeaders({'content-type': 'application/x-www-form-urlencoded',
-      'grant_type': 'refresh_token',
-      'refresh_token': this.getRefreshToken()
+    const headers = new HttpHeaders({
+      'content-type': 'application/x-www-form-urlencoded',
+      grant_type: 'refresh_token',
+      refresh_token: this.getRefreshToken(),
     });
-    return this.http.post(this.refreshTokenUrl, '', {headers});
+    return this.http.post(this.refreshTokenUrl, '', { headers });
   }
 
   public logout(): void {
@@ -54,5 +61,4 @@ export class ApiAuthService {
     localStorage.setItem(this.refreshTokenKey, null);
     this.router.navigate([this.appConfigurations.logoutAppPath]);
   }
-
 }

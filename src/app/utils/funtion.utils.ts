@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs/of';
 
 /**
  * Get today date and subtract the input number days
@@ -7,22 +7,22 @@ import { of } from 'rxjs/observable/of';
  * @returns date in MM/DD/YYYY format with subtracted days
  */
 export function getTodayDateMinusInputDays(days: number): string {
-    const today = new Date();
+  const today = new Date();
 
-    const subtractedDate = today.getDate() - days;
-    today.setDate(subtractedDate);
+  const subtractedDate = today.getDate() - days;
+  today.setDate(subtractedDate);
 
-    const formatSubtractedDate = today.toLocaleDateString('en-US', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
+  const formatSubtractedDate = today.toLocaleDateString('en-US', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
 
-    return formatSubtractedDate;
+  return formatSubtractedDate;
 }
 
 export function mapObjectTypeToRequested<T>(input: any): T {
-    return input;
+  return input;
 }
 
 /**
@@ -32,14 +32,18 @@ export function mapObjectTypeToRequested<T>(input: any): T {
  * @param property property to compare objects
  * @returns new array with the difference
  */
-export function getDiferenceBetweenObjectArraysByProperty(array1: any[], array2: any[], property: string): any[] {
-    const difference = array1.filter((op2) => {
-        return !array2.some((op1) => {
-            // tslint:disable-next-line:triple-equals
-            return op1[property] == op2[property];
-        });
+export function getDiferenceBetweenObjectArraysByProperty(
+  array1: any[],
+  array2: any[],
+  property: string
+): any[] {
+  const difference = array1.filter((op2) => {
+    return !array2.some((op1) => {
+      // tslint:disable-next-line:triple-equals
+      return op1[property] == op2[property];
     });
-    return difference;
+  });
+  return difference;
 }
 
 /**
@@ -47,5 +51,5 @@ export function getDiferenceBetweenObjectArraysByProperty(array1: any[], array2:
  * @returns empty Observable
  */
 export function apiRequest(): Observable<any> {
-    return of({});
+  return of({});
 }

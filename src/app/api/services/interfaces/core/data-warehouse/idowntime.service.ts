@@ -1,7 +1,8 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { IMachineDowntimeScreenDto } from '../../../../models/apimodels';
 
 export abstract class IDownTimeMachiningService {
-
-    public abstract GetDownTimeData( obj: any ): Observable<IMachineDowntimeScreenDto>;
+  public abstract GetDownTimeData(
+    obj: any
+  ): Observable<IMachineDowntimeScreenDto>;
 }

@@ -1,42 +1,27 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
-    "noEmit": true,
-    "noEmitHelpers": true,
-    "importHelpers": true,
-    "removeComments": true,
-    "strictNullChecks": false,
-    "baseUrl": ".",
-    "lib": ["es6", "dom"],
-    "paths": {
-      "@angular/*": ["node_modules/@angular/*"],
-      "@api/*": ["src/app/api/*"],
-      "@mimsUI/*": ["src/app/mims-ui/*"]
-    },
-    "typeRoots": ["node_modules/@types"],
-    "types": ["node", "uglify-js", "faker","webpack"],
-    "declaration": false
-  },
-  "exclude": [
-    "node_modules",
-    "env",
-    "config",
-    "webpack",
-    "build",
-    "bin",
-    "obj",
-    "Properties"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
-  },
   "compileOnSave": false,
-  "buildOnSave": false
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }

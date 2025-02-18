@@ -19,7 +19,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { GlobalEnvironmentService } from './global.environment.service';
 import { APP_CONFIG, AppConfig } from './app.config';
 // CUSTOM MODULES
-import { ApiModule } from '@api/api.module';
+import { ApiModule } from './api/api.module';
+
+import { routes } from './app.routes';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -32,11 +34,7 @@ export function localStorageSyncReducer(
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
-const Paths: Routes = [
-  { path: '', loadChildren: './auth/auth.module#AuthModule' }
-];
-
-const RouterRoot = RouterModule.forRoot(Paths);
+const RouterRoot = RouterModule.forRoot(routes);
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,15 +45,15 @@ const RouterRoot = RouterModule.forRoot(Paths);
     EffectsModule.forRoot([]),
     ApiModule.forRoot(),
     StoreModule.forRoot({}, { metaReducers }),
-    StoreDevtoolsModule.instrument({ maxAge: 15 })
+    StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
   providers: [
     GlobalEnvironmentService,
     {
       provide: APP_CONFIG,
-      useValue: AppConfig
-    }
+      useValue: AppConfig,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

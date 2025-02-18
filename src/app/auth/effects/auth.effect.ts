@@ -3,7 +3,7 @@ import { UserModelUI } from './../models/auth.models';
 import { Injectable, Injector } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { catchError, switchMap, map, tap } from 'rxjs/operators';
 import * as MimsModels from '@api/models/apimodels';
 
@@ -11,7 +11,7 @@ import {
   AuthActionTypes,
   Login,
   LoginFailure,
-  LoginSuccess
+  LoginSuccess,
 } from './../actions/auth.actions';
 
 import { IAuthorizationService } from '@api/services/interfaces/core/iauthorization.service';
@@ -27,7 +27,7 @@ export class AuthEffects {
       const actionPayload: LoginModelUI = action.payload;
       const loginDto: MimsModels.ILoginDto = {
         UserName: actionPayload.username,
-        Password: actionPayload.password
+        Password: actionPayload.password,
       };
       return loginDto;
     }),
@@ -40,10 +40,10 @@ export class AuthEffects {
             localStorage.setItem(this.accessTokenKey, user.AccessToken);
             localStorage.setItem(this.refreshTokenKey, user.RefreshToken);
             const newActionPayload: UserModelUI = {
-                Id: user.User.Id,
-                Name: user.User.Name,
-                Email: user.User.Email,
-                Login: user.User.Login
+              Id: user.User.Id,
+              Name: user.User.Name,
+              Email: user.User.Email,
+              Login: user.User.Login,
             };
             return new LoginSuccess(newActionPayload);
           }

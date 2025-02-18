@@ -1,10 +1,12 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-/**
- * The app component.
- */
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'Angular-Redux-Updated';
+}

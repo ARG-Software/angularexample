@@ -1,76 +1,59 @@
-# 🚀 Angular-Redux
+# AngularReduxUpdated
 
-A structured Angular project integrating Redux for state management, demonstrating best practices for scalable frontend applications.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
 
-## 📌 Features
+## Development server
 
-✅ **State Management with Redux** – Uses Redux for predictable state management.  
-✅ **Modular Architecture** – Organized and scalable folder structure.  
-✅ **TypeScript Support** – Ensures type safety and better maintainability.  
-✅ **Webpack Configuration** – Optimized for performance.  
-✅ **Linting & Formatting** – Enforced via `tslint.json` and Prettier.  
+To start a local development server, run:
 
-## 📂 Project Structure
-
-```
-Angular-Redux/
-│── src/
-│   ├── app/              # Main application folder
-│   ├── components/       # Reusable UI components
-│   ├── services/         # API and data services
-│   ├── store/            # Redux store, actions, reducers
-│   ├── styles/           # Global styles
-│── .gitignore            # Git ignore rules
-│── package.json          # Project dependencies
-│── tsconfig.json         # TypeScript configuration
-│── webpack.config.js     # Webpack build setup
+```bash
+ng serve
 ```
 
-## 🛠️ Prerequisites
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-Before running this project, ensure you have the following installed:
+## Code scaffolding
 
-- **Node.js** (>= 14.x) – [Download Here](https://nodejs.org/)
-- **Angular CLI** – Install using:  
-  ```sh
-  npm install -g @angular/cli
-  ```
-- **Redux DevTools Extension** (Optional, for debugging)
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-## 🚀 Getting Started
-
-1️⃣ **Clone the Repository**  
-```sh
-git clone https://github.com/ARG-Software/Angular-Redux.git
-cd Angular-Redux
+```bash
+ng generate component component-name
 ```
 
-2️⃣ **Install Dependencies**  
-```sh
-npm install
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+
+```bash
+ng generate --help
 ```
 
-3️⃣ **Run the Development Server**  
-```sh
-npm start
+## Building
+
+To build the project run:
+
+```bash
+ng build
 ```
-👉 The app will be available at `http://localhost:4200/`
 
-## 📖 Usage
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-- Modify components in the `src/app/components/` folder.
-- Manage state via the `src/app/store/` using Redux.
-- Adjust global styles in `src/styles/`.
+## Running unit tests
 
-## 🤝 Contributing
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-Contributions are welcome! If you have improvements, feel free to open a pull request or submit an issue.
+```bash
+ng test
+```
 
-## 📜 License
+## Running end-to-end tests
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+For end-to-end (e2e) testing, run:
 
----
+```bash
+ng e2e
+```
 
-💡 *This README provides an overview of the project structure and setup. Feel free to customize it according to your needs!*
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
