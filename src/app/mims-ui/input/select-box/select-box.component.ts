@@ -10,43 +10,54 @@ import {
   OnChanges,
   SimpleChanges,
   ChangeDetectorRef,
-  OnInit
-} from '@angular/core';
-import { MimsSelectBoxModel } from './models/select-box.model';
-import { BaseControlComponent } from '@mimsUI/base/base.component';
-import { NgModel, NG_ASYNC_VALIDATORS, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+  OnInit,
+} from "@angular/core";
+import { MimsSelectBoxModel } from "./models/select-box.model";
+import { BaseControlComponent } from "@mimsUI/base/base.component";
+import {
+  NgModel,
+  NG_ASYNC_VALIDATORS,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+} from "@angular/forms";
 
 @Component({
-  selector: 'mims-select-box',
-  templateUrl: './select-box.component.html',
+  selector: "mims-select-box",
+  templateUrl: "./select-box.component.html",
   providers: [
     {
-        provide: NG_VALUE_ACCESSOR,
-        // tslint:disable-next-line:no-forward-ref
-        useExisting: forwardRef(() => SelectBoxComponent),
-        multi: true
+      provide: NG_VALUE_ACCESSOR,
+      // tslint:disable-next-line:no-forward-ref
+      useExisting: forwardRef(() => SelectBoxComponent),
+      multi: true,
     },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectBoxComponent extends BaseControlComponent<MimsSelectBoxModel> implements  OnChanges {
-  @Input() public data: MimsSelectBoxModel[];
+export class SelectBoxComponent
+  extends BaseControlComponent<MimsSelectBoxModel>
+  implements OnChanges
+{
+  @Input() public data!: MimsSelectBoxModel[];
   @Output() public changed = new EventEmitter<MimsSelectBoxModel>();
-  protected model: NgModel;
+  protected model!: NgModel;
   protected selected: string | number | undefined;
 
-  constructor( @Optional() @Inject(NG_VALIDATORS) validators: any[],
-               @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: any[], private ref: ChangeDetectorRef) {
+  constructor(
+    @Optional() @Inject(NG_VALIDATORS) validators: any[],
+    @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: any[],
+    private ref: ChangeDetectorRef
+  ) {
     super(validators, asyncValidators);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (this.data) {
       this.data.map((ele) => {
-      if (ele.selected === true) {
-        this.value = ele;
-        this.selected = ele.value;
-      }
+        if (ele.selected === true) {
+          this.value = ele;
+          this.selected = ele.value;
+        }
       });
     }
   }
@@ -55,9 +66,8 @@ export class SelectBoxComponent extends BaseControlComponent<MimsSelectBoxModel>
     const selectedItem = this.data.find((elem) => {
       // tslint:disable-next-line:triple-equals
       return elem.value == selectedValue;
-    });
+    }) as MimsSelectBoxModel;
     this.value = selectedItem;
     this.changed.emit(selectedItem);
   }
-
 }
