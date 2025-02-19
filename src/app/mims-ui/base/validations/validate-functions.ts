@@ -4,9 +4,10 @@ import {
   Validator,
   Validators,
   ValidatorFn,
-} from '@angular/forms';
-
-import { Observable } from 'rxjs';
+  ValidationErrors,
+} from "@angular/forms";
+import { Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
 
 export interface ValidationResult {
   [validator: string]: string | boolean;
@@ -17,65 +18,61 @@ export type ValidatorArray = Array<Validator | ValidatorFn>;
 const normalizeValidator = (
   validator: Validator | ValidatorFn
 ): ValidatorFn | AsyncValidatorFn => {
-  const func = (validator as Validator).validate.bind(validator);
-  if (typeof func === 'function') {
-    return (c: AbstractControl) => func(c);
-  } else {
-    return validator as ValidatorFn | AsyncValidatorFn;
-  }
+  const func = (validator as Validator).validate?.bind(validator);
+  return typeof func === "function"
+    ? (c: AbstractControl) => func(c)
+    : (validator as ValidatorFn | AsyncValidatorFn);
 };
 
 export const composeValidators = (
   validators: ValidatorArray
-): AsyncValidatorFn | ValidatorFn => {
-  if (validators == null || validators.length === 0) {
+): AsyncValidatorFn | ValidatorFn | null => {
+  if (!validators || validators.length === 0) {
     return null;
   }
   return Validators.compose(validators.map(normalizeValidator));
 };
 
-export const validate = (
-  validators: ValidatorArray,
-  asyncValidators: AsyncValidatorArray
-) => {
-  return (control: AbstractControl) => {
-    const synchronousValid = () => composeValidators(validators)(control);
+export const validate =
+  (validators: ValidatorArray, asyncValidators: AsyncValidatorArray) =>
+  (control: AbstractControl): Observable<ValidationErrors | null> => {
+    const syncValidator = composeValidators(validators);
+    const asyncValidator = composeValidators(asyncValidators);
 
-    if (asyncValidators) {
-      const asyncValidator = composeValidators(asyncValidators);
+    const syncResult = syncValidator ? syncValidator(control) : null;
 
-      return asyncValidator(control).map((v) => {
-        const secondary = synchronousValid();
-        if (secondary || v) {
-          return Object.assign({}, secondary, v);
-        }
-      });
+    if (asyncValidator) {
+      return (
+        asyncValidator(control) as Observable<ValidationErrors | null>
+      ).pipe(map((asyncResult) => ({ ...syncResult, ...asyncResult })));
     }
 
-    if (validators) {
-      return Observable.of(synchronousValid());
-    }
-
-    return Observable.of(null);
+    return of(syncResult);
   };
-};
 
 export const message = (validator: ValidationResult, key: string): string => {
-  switch (key) {
-    case 'required':
-      return 'Please enter a value';
-    case 'pattern':
-      return 'Value does not match required pattern';
-    case 'minlength':
-      return `Value must be ${validator[key]['requiredLength']} characters`;
-    case 'maxlength':
-      return `Value must be a maximum of ${validator[key]['requiredLength']} characters`;
-  }
+  const validationValue = validator[key];
 
-  switch (typeof validator[key]) {
-    case 'string':
-      return validator[key] as string;
-    default:
+  switch (key) {
+    case "required":
+      return "Please enter a value";
+    case "pattern":
+      return "Value does not match required pattern";
+    case "minlength":
+    case "maxlength":
+      if (
+        typeof validationValue === "object" &&
+        validationValue !== null &&
+        "requiredLength" in validationValue
+      ) {
+        return `Value must be ${key === "minlength" ? "at least" : "at most"} ${
+          (validationValue as { requiredLength: number }).requiredLength
+        } characters`;
+      }
       return `Validation failed: ${key}`;
+    default:
+      return typeof validationValue === "string"
+        ? validationValue
+        : `Validation failed: ${key}`;
   }
 };

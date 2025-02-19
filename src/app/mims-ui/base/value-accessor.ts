@@ -1,8 +1,8 @@
-import { Input, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { Input } from "@angular/core";
+import { ControlValueAccessor } from "@angular/forms";
 
 export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
-  private _value: T;
+  private _value: T = null as any;
 
   public get value(): T {
     return this._value;
@@ -11,7 +11,7 @@ export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
   @Input()
   public set value(v: T) {
     this._value = v;
-    if (!(typeof v === 'boolean')) {
+    if (!(typeof v === "boolean")) {
       this.propagateChange(this.value);
     }
   }
@@ -41,6 +41,5 @@ export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
 
   protected propagateChange: (_: any) => void = (_?: any) => {
     // throw new DOMException('Not Implemented');
-  }
-
+  };
 }
