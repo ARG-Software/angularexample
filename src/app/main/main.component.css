@@ -1,0 +1,10 @@
+.main-body
+{
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 20px 10px auto 10px;
+}
+
+.content-area-position{
+    position: relative;
+}
