@@ -1,32 +1,32 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { NgModule } from "@angular/core";
 
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 // COMPONENTS
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
 
 // REDUX
-import { StoreModule, ActionReducer, MetaReducer } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
-import { localStorageSync } from 'ngrx-store-localstorage';
+import { StoreModule, ActionReducer, MetaReducer } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { EffectsModule } from "@ngrx/effects";
+import { localStorageSync } from "ngrx-store-localstorage";
 
 // ROUTING
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from "@angular/router";
 
 // CONFIGURATIONS
-import { GlobalEnvironmentService } from './global.environment.service';
-import { APP_CONFIG, AppConfig } from './app.config';
+import { GlobalEnvironmentService } from "./global.environment.service";
+import { APP_CONFIG, AppConfig } from "./app.config";
 // CUSTOM MODULES
-import { ApiModule } from './api/api.module';
+//import { ApiModule } from './api/api.module';
 
-import { routes } from './app.routes';
+import { routes } from "./app.routes";
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  const localStorage = localStorageSync({ rehydrate: true, keys: ['auth'] })(
+  const localStorage = localStorageSync({ rehydrate: true, keys: ["auth"] })(
     reducer
   );
   return localStorage;
@@ -37,13 +37,12 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 const RouterRoot = RouterModule.forRoot(routes);
 
 @NgModule({
-  declarations: [AppComponent],
   imports: [
     RouterRoot,
     BrowserModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([]),
-    ApiModule.forRoot(),
+    //ApiModule.forRoot(),
     StoreModule.forRoot({}, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
@@ -54,6 +53,5 @@ const RouterRoot = RouterModule.forRoot(routes);
       useValue: AppConfig,
     },
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

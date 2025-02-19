@@ -11,3 +11,5 @@ src/*.js
 src/*.map
 dist
 *.orig
+
+.angular/
