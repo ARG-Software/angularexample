@@ -1,14 +1,19 @@
-import { Input, Component, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
-import { MimsUiUtilsService } from '../../../mims-ui.utils.service';
+import {
+  Input,
+  Component,
+  ChangeDetectionStrategy,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
+import { MimsUiUtilsService } from "../../../mims-ui.utils.service";
 
 @Component({
-  selector: 'mims-vertical-bar-chart',
-  templateUrl: './vertical-bar-chart.component.html',
-  styleUrls: ['./vertical-bar-chart.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "mims-vertical-bar-chart",
+  templateUrl: "./vertical-bar-chart.component.html",
+  styleUrls: ["./vertical-bar-chart.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
-export class VerticalChartBarComponent implements OnChanges  {
+export class VerticalChartBarComponent implements OnChanges {
   public hasContent = false;
   public multi = [];
   public view: any[] = [400, 400];
@@ -17,21 +22,19 @@ export class VerticalChartBarComponent implements OnChanges  {
   public showYAxis = true;
   public gradient = true;
   public showXAxisLabel = true;
-  public xAxisLabel = 'Machine';
+  public xAxisLabel = "Machine";
   public showYAxisLabel = true;
   public colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ["#5AA454", "#A10A28", "#C7B42C", "#AAAAAA"],
   };
-  @Input() public data: any[];
+  @Input() public data: any[] = [];
 
-  public constructor(private mimsUIUtilServices: MimsUiUtilsService) {
-  }
+  public constructor(private mimsUIUtilServices: MimsUiUtilsService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (this.mimsUIUtilServices.verifyIfIncomeInputIsValid(changes.data)) {
-        this.hasContent = true;
-        this.multi = changes.data.currentValue;
+    if (this.mimsUIUtilServices.verifyIfIncomeInputIsValid(changes["data"])) {
+      this.hasContent = true;
+      this.multi = changes["data"].currentValue;
     }
   }
-
-  }
+}
