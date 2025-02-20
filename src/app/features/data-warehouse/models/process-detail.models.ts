@@ -1,4 +1,4 @@
-import * as faker from "faker/locale/en_US";
+import { faker } from "@faker-js/faker";
 import * as Factory from "factory.ts";
 
 export interface ProcessDetailValuesChartModelUI {
@@ -33,23 +33,23 @@ export interface ProcessDetailDataModelUI {
 
 export const ProcessDetailValuesChartModelUIFactory =
   Factory.makeFactory<ProcessDetailValuesChartModelUI>({
-    name: faker.random.word(),
-    value: faker.random.number(),
+    name: faker.word.sample(),
+    value: faker.number.int(),
     extra: null,
   });
 
 export const ProcessDetailChartModelUIFactory =
   Factory.makeFactory<ProcessDetailChartModelUI>({
-    name: faker.random.word(),
+    name: faker.word.sample(),
     series: ProcessDetailValuesChartModelUIFactory.buildList(3),
   });
 
 export const ProcessDetailTableModelUIFactory =
   Factory.makeFactory<ProcessDetailTableModelUI>({
-    Id: faker.random.number(),
-    MachineState: faker.random.word(),
-    Reason: faker.random.word(),
-    Duration: faker.random.number(),
+    Id: faker.number.int(),
+    MachineState: faker.word.sample(),
+    Reason: faker.word.sample(),
+    Duration: faker.number.int(),
     StartTime: faker.date.recent(),
     EndTime: faker.date.recent(),
   });
@@ -57,7 +57,7 @@ export const ProcessDetailTableModelUIFactory =
 export const ProcessDetailTableInformationModelUIFactory =
   Factory.makeFactory<ProcessDetailTableInformationModelUI>({
     Information: ProcessDetailTableModelUIFactory.buildList(2),
-    Total: faker.random.number(),
+    Total: faker.number.int(),
   });
 
 export const ProcessDetailDataModelUIFactory =

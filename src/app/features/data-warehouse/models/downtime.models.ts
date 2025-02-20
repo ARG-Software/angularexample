@@ -56,13 +56,13 @@ export interface MachiningRequestModelUI {
 
 export const ComboBarChartDataModelUIFactory =
   Factory.makeFactory<ComboBarChartDataModelUI>({
-    name: faker.random.word(),
-    value: faker.random.number(),
+    name: faker.word.sample(),
+    value: faker.number.int(),
   });
 
 export const ComboLineChartDataModelUIFactory =
   Factory.makeFactory<ComboLineChartDataModelUI>({
-    name: faker.random.word(),
+    name: faker.word.sample(),
     series: ComboBarChartDataModelUIFactory.buildList(2),
   });
 
@@ -74,15 +74,15 @@ export const ComboChartDataModelUIFactory =
 
 export const DowntimeTableDataModelUIFactory =
   Factory.makeFactory<DowntimeTableDataModelUI>({
-    Machine: faker.random.word(),
-    Downtime: faker.random.number(),
-    Instances: faker.random.number(),
+    Machine: faker.word.sample(),
+    Downtime: faker.number.int(),
+    Instances: faker.number.int(),
   });
 
 export const DowntimeTableInformationModelUIFactory =
   Factory.makeFactory<DowntimeTableInformationModelUI>({
     Information: DowntimeTableDataModelUIFactory.buildList(2),
-    Total: faker.random.number(),
+    Total: faker.number.int(),
   });
 
 export const DowntimeDataModelUIFactory =
@@ -93,10 +93,10 @@ export const DowntimeDataModelUIFactory =
 
 export const MachiningFilterModelUIFactory =
   Factory.makeFactory<MachiningFilterModelUI>({
-    MachineId: faker.random.number(),
-    ProductId: faker.random.number(),
-    StartDate: faker.date.recent().toString(),
-    EndDate: faker.date.recent().toString(),
+    MachineId: faker.number.int(),
+    ProductId: faker.number.int(),
+    StartDate: faker.date.recent().toISOString(),
+    EndDate: faker.date.recent().toISOString(),
   });
 
 export const MachiningRequestModelUIFactory =

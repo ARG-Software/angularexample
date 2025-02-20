@@ -31,28 +31,28 @@ export interface OeeDataModelUI {
 
 export const OeeValuesChartModelUIFactory =
   Factory.makeFactory<OeeValuesChartModelUI>({
-    name: faker.random.word(),
-    value: faker.random.number(),
+    name: faker.word.sample(),
+    value: faker.number.int(),
   });
 
 export const OeeChartDataModelUIFactory =
   Factory.makeFactory<OeeChartDataModelUI>({
-    name: faker.random.word(),
+    name: faker.word.sample(),
     series: OeeValuesChartModelUIFactory.buildList(3),
   });
 
 export const OeeTableDataModelUIFactory =
   Factory.makeFactory<OeeTableDataModelUI>({
-    Product: faker.random.word(),
-    Availability: faker.random.number(),
-    Production: faker.random.number(),
-    Quality: faker.random.number(),
+    Product: faker.word.sample(),
+    Availability: faker.number.int(),
+    Production: faker.number.int(),
+    Quality: faker.number.int(),
   });
 
 export const OeeTableInformationModelUIFactory =
   Factory.makeFactory<OeeTableInformationModelUI>({
     Information: OeeTableDataModelUIFactory.buildList(2),
-    Total: faker.random.number(),
+    Total: faker.number.int(),
   });
 
 export const OeeDataModelUIFactory = Factory.makeFactory<OeeDataModelUI>({
