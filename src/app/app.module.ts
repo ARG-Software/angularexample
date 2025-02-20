@@ -19,9 +19,10 @@ import { RouterModule, Routes } from "@angular/router";
 import { GlobalEnvironmentService } from "./global.environment.service";
 import { APP_CONFIG, AppConfig } from "./app.config";
 // CUSTOM MODULES
-//import { ApiModule } from './api/api.module';
+import { ApiModule } from "./api/api.module";
 
 import { routes } from "./app.routes";
+import { provideHttpClient } from "@angular/common/http";
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -42,11 +43,12 @@ const RouterRoot = RouterModule.forRoot(routes);
     BrowserModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([]),
-    //ApiModule.forRoot(),
+    ApiModule.forRoot(),
     StoreModule.forRoot({}, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 15 }),
   ],
   providers: [
+    provideHttpClient(),
     GlobalEnvironmentService,
     {
       provide: APP_CONFIG,
