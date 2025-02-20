@@ -11,7 +11,7 @@ const MainRoutingModule = RouterModule.forChild([
   {
     path: "",
     component: MainComponent,
-    /* children: [
+    children: [
       {
         path: "products",
         loadChildren: "../features/products/products.module#ProductsModule",
@@ -26,7 +26,7 @@ const MainRoutingModule = RouterModule.forChild([
         loadChildren:
           "../features/production/production.module#ProductionModule",
       },
-    ], */
+    ],
   },
 ]);
 

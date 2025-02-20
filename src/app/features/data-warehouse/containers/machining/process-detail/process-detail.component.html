@@ -1,0 +1,17 @@
+<mims-header [title]="'Timeline'"
+             [subTitle]="'Process Detail'"
+             [color]="'#5965e7'">
+    <process-detail-filter-box [machineSelectBoxData]="machineSelectBoxData$ | async"
+                               [defaultFilters]="request.Filters"
+                               (OnFilterApply)="filtersOptions($event)">
+    </process-detail-filter-box>
+</mims-header>
+
+<process-detail-information [chartData]="chartData$ | async"
+                            [tableData]="tableData$ | async"
+                            [chartSize]="chartSize"
+                            [tableHeaders]="tableHeaders"
+                            [columnNames]="columnNames"
+                            [paginationDetails]="tablePaging$ | async"
+                            (changePage)="requestNewPage($event)">
+</process-detail-information>
