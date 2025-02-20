@@ -10,7 +10,6 @@ import {
   OeeChartDataModelUI,
   OeeTableDataModelUI,
 } from "../../../models/oee.models";
-import { DEFAULT_PAGING } from "../../../../../app.constants";
 import { MachiningRequestModelUI } from "../../../models/downtime.models";
 import { getTodayDateMinusInputDays } from "../../../../../utils/funtion.utils";
 import { PagingModelUI } from "src/app/app.models";

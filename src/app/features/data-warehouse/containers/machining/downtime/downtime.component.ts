@@ -11,10 +11,8 @@ import { MimsSelectBoxModel } from "@mimsUI/input/select-box/models/select-box.m
 import {
   ComboChartDataModelUI,
   DowntimeTableDataModelUI,
-  MachiningFilterModelUI,
 } from "../../../models/downtime.models";
 import { getTodayDateMinusInputDays } from "../../../../../utils/funtion.utils";
-import { DEFAULT_PAGING } from "../../../../../app.constants";
 import { MachiningRequestModelUI } from "../../../models/downtime.models";
 import { PagingModelUI } from "src/app/app.models";
 

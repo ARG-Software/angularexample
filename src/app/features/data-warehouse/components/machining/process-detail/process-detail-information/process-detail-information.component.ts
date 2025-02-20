@@ -17,12 +17,12 @@ import { PagingModelUI } from "src/app/app.models";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcessDetailInformationComponent {
-  @Input() protected chartData!: ProcessDetailChartModelUI[];
-  @Input() protected tableData!: ProcessDetailTableModelUI[];
+  @Input() protected chartData: ProcessDetailChartModelUI[];
+  @Input() protected tableData: ProcessDetailTableModelUI[];
   @Input() protected chartSize: any;
   @Input() protected tableHeaders: any;
   @Input() protected columnNames: any;
-  @Input() protected paginationDetails!: PagingModelUI;
+  @Input() protected paginationDetails: PagingModelUI;
 
   @Output() protected changePage: EventEmitter<number> = new EventEmitter();
 
