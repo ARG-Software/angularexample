@@ -1,5 +1,5 @@
-import * as faker from 'faker/locale/en_US';
-import * as Factory from 'factory.ts';
+import { faker } from "@faker-js/faker";
+import * as Factory from "factory.ts";
 
 export interface DownTimeRecordChartModel {
   name: string;
@@ -18,20 +18,23 @@ export interface MachineOperationsRequestModel {
 }
 
 export const ChartSeriesModelUIFactory = Factory.makeFactory<ChartSeriesModel>({
-    name: faker.random.word(),
-    value: faker.random.number()
+  name: faker.random.word(),
+  value: faker.random.number(),
 });
 
-export const DownTimeRecordChartModelUIFactory = Factory.makeFactory<DownTimeRecordChartModel>({
+export const DownTimeRecordChartModelUIFactory =
+  Factory.makeFactory<DownTimeRecordChartModel>({
     name: faker.random.word(),
-    series: ChartSeriesModelUIFactory.buildList(2)
-});
+    series: ChartSeriesModelUIFactory.buildList(2),
+  });
 
-export const DownTimeStatisticsChartRequestModelUIFactory = Factory.makeFactory<DownTimeStatisticsChartRequestModel>({
+export const DownTimeStatisticsChartRequestModelUIFactory =
+  Factory.makeFactory<DownTimeStatisticsChartRequestModel>({
     productId: faker.random.number(),
-    startDate: faker.date.recent()
-});
+    startDate: faker.date.recent(),
+  });
 
-export const MachineOperationsRequestModelUIFactory = Factory.makeFactory<MachineOperationsRequestModel>({
-    productId: faker.random.number()
-});
+export const MachineOperationsRequestModelUIFactory =
+  Factory.makeFactory<MachineOperationsRequestModel>({
+    productId: faker.random.number(),
+  });

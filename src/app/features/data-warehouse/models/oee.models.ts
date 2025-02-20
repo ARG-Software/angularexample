@@ -1,57 +1,61 @@
-import { PagingModelUI, PagingModelUIFactory  } from '../../../app.models';
-import * as faker from 'faker/locale/en_US';
-import * as Factory from 'factory.ts';
+import { PagingModelUI, PagingModelUIFactory } from "../../../app.models";
+import { faker } from "@faker-js/faker";
+import * as Factory from "factory.ts";
 
 export interface OeeValuesChartModelUI {
-    name: string;
-    value: number;
+  name: string;
+  value: number;
 }
 
 export interface OeeChartDataModelUI {
-    name: string;
-    series: OeeValuesChartModelUI[];
+  name: string;
+  series: OeeValuesChartModelUI[];
 }
 
 export interface OeeTableDataModelUI {
-    Product: string;
-    Availability: number;
-    Production: number;
-    Quality: number;
+  Product: string;
+  Availability: number;
+  Production: number;
+  Quality: number;
 }
 
 export interface OeeTableInformationModelUI {
-    Information: OeeTableDataModelUI[];
-    Total: number;
+  Information: OeeTableDataModelUI[];
+  Total: number;
 }
 
 export interface OeeDataModelUI {
-    Chart: OeeChartDataModelUI[];
-    Table: OeeTableInformationModelUI;
+  Chart: OeeChartDataModelUI[];
+  Table: OeeTableInformationModelUI;
 }
 
-export const OeeValuesChartModelUIFactory = Factory.makeFactory<OeeValuesChartModelUI>({
+export const OeeValuesChartModelUIFactory =
+  Factory.makeFactory<OeeValuesChartModelUI>({
     name: faker.random.word(),
-    value: faker.random.number()
-});
+    value: faker.random.number(),
+  });
 
-export const OeeChartDataModelUIFactory = Factory.makeFactory<OeeChartDataModelUI>({
+export const OeeChartDataModelUIFactory =
+  Factory.makeFactory<OeeChartDataModelUI>({
     name: faker.random.word(),
-    series: OeeValuesChartModelUIFactory.buildList(3)
-});
+    series: OeeValuesChartModelUIFactory.buildList(3),
+  });
 
-export const OeeTableDataModelUIFactory = Factory.makeFactory<OeeTableDataModelUI>({
+export const OeeTableDataModelUIFactory =
+  Factory.makeFactory<OeeTableDataModelUI>({
     Product: faker.random.word(),
     Availability: faker.random.number(),
     Production: faker.random.number(),
-    Quality: faker.random.number()
-});
+    Quality: faker.random.number(),
+  });
 
-export const OeeTableInformationModelUIFactory = Factory.makeFactory<OeeTableInformationModelUI>({
+export const OeeTableInformationModelUIFactory =
+  Factory.makeFactory<OeeTableInformationModelUI>({
     Information: OeeTableDataModelUIFactory.buildList(2),
-    Total: faker.random.number()
-});
+    Total: faker.random.number(),
+  });
 
 export const OeeDataModelUIFactory = Factory.makeFactory<OeeDataModelUI>({
-    Chart: OeeChartDataModelUIFactory.buildList(2),
-    Table: OeeTableInformationModelUIFactory.build()
+  Chart: OeeChartDataModelUIFactory.buildList(2),
+  Table: OeeTableInformationModelUIFactory.build(),
 });

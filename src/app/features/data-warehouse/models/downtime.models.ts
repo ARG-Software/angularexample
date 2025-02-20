@@ -1,98 +1,106 @@
-import * as faker from 'faker/locale/en_US';
-import * as Factory from 'factory.ts';
-import { PagingModelUI, PagingModelUIFactory } from '../../../app.models';
+import { faker } from "@faker-js/faker";
+import * as Factory from "factory.ts";
+import { PagingModelUI, PagingModelUIFactory } from "../../../app.models";
 
 export interface ColorNameModelUI {
-    domain: string[];
+  domain: string[];
 }
 
 export interface ComboChartColorsModelUI {
-    Bar: ColorNameModelUI;
-    Line: ColorNameModelUI;
+  Bar: ColorNameModelUI;
+  Line: ColorNameModelUI;
 }
 
 export interface ComboBarChartDataModelUI {
-    name: string;
-    value: number;
+  name: string;
+  value: number;
 }
 
 export interface ComboLineChartDataModelUI {
-    name: string;
-    series: ComboBarChartDataModelUI[];
+  name: string;
+  series: ComboBarChartDataModelUI[];
 }
 
 export interface ComboChartDataModelUI {
-    Bar: ComboBarChartDataModelUI[];
-    Line: ComboLineChartDataModelUI[];
+  Bar: ComboBarChartDataModelUI[];
+  Line: ComboLineChartDataModelUI[];
 }
 
 export interface DowntimeTableDataModelUI {
-    Machine: string;
-    Downtime: number;
-    Instances: number;
+  Machine: string;
+  Downtime: number;
+  Instances: number;
 }
 
 export interface DowntimeTableInformationModelUI {
-    Information: DowntimeTableDataModelUI[];
-    Total: number;
+  Information: DowntimeTableDataModelUI[];
+  Total: number;
 }
 
 export interface DowntimeDataModelUI {
-    Chart: ComboChartDataModelUI;
-    Table: DowntimeTableInformationModelUI;
+  Chart: ComboChartDataModelUI;
+  Table: DowntimeTableInformationModelUI;
 }
 
 export interface MachiningFilterModelUI {
-    MachineId: number;
-    ProductId: number;
-    StartDate: string;
-    EndDate: string;
+  MachineId: number;
+  ProductId: number;
+  StartDate: string;
+  EndDate: string;
 }
 
 export interface MachiningRequestModelUI {
-    Filters: MachiningFilterModelUI;
-    Paging: PagingModelUI;
+  Filters: MachiningFilterModelUI;
+  Paging: PagingModelUI;
 }
 
-export const ComboBarChartDataModelUIFactory = Factory.makeFactory<ComboBarChartDataModelUI>({
+export const ComboBarChartDataModelUIFactory =
+  Factory.makeFactory<ComboBarChartDataModelUI>({
     name: faker.random.word(),
-    value: faker.random.number()
-});
+    value: faker.random.number(),
+  });
 
-export const ComboLineChartDataModelUIFactory = Factory.makeFactory<ComboLineChartDataModelUI>({
+export const ComboLineChartDataModelUIFactory =
+  Factory.makeFactory<ComboLineChartDataModelUI>({
     name: faker.random.word(),
-    series: ComboBarChartDataModelUIFactory.buildList(2)
-});
+    series: ComboBarChartDataModelUIFactory.buildList(2),
+  });
 
-export const ComboChartDataModelUIFactory = Factory.makeFactory<ComboChartDataModelUI>({
+export const ComboChartDataModelUIFactory =
+  Factory.makeFactory<ComboChartDataModelUI>({
     Bar: ComboBarChartDataModelUIFactory.buildList(3),
-    Line: ComboLineChartDataModelUIFactory.buildList(2)
-});
+    Line: ComboLineChartDataModelUIFactory.buildList(2),
+  });
 
-export const DowntimeTableDataModelUIFactory = Factory.makeFactory<DowntimeTableDataModelUI>({
+export const DowntimeTableDataModelUIFactory =
+  Factory.makeFactory<DowntimeTableDataModelUI>({
     Machine: faker.random.word(),
     Downtime: faker.random.number(),
-    Instances: faker.random.number()
-});
+    Instances: faker.random.number(),
+  });
 
-export const DowntimeTableInformationModelUIFactory = Factory.makeFactory<DowntimeTableInformationModelUI>({
+export const DowntimeTableInformationModelUIFactory =
+  Factory.makeFactory<DowntimeTableInformationModelUI>({
     Information: DowntimeTableDataModelUIFactory.buildList(2),
-    Total: faker.random.number()
-});
+    Total: faker.random.number(),
+  });
 
-export const DowntimeDataModelUIFactory = Factory.makeFactory<DowntimeDataModelUI>({
+export const DowntimeDataModelUIFactory =
+  Factory.makeFactory<DowntimeDataModelUI>({
     Chart: ComboChartDataModelUIFactory.build(),
-    Table: DowntimeTableInformationModelUIFactory.build()
-});
+    Table: DowntimeTableInformationModelUIFactory.build(),
+  });
 
-export const MachiningFilterModelUIFactory = Factory.makeFactory<MachiningFilterModelUI>({
+export const MachiningFilterModelUIFactory =
+  Factory.makeFactory<MachiningFilterModelUI>({
     MachineId: faker.random.number(),
     ProductId: faker.random.number(),
     StartDate: faker.date.recent().toString(),
-    EndDate: faker.date.recent().toString()
-});
+    EndDate: faker.date.recent().toString(),
+  });
 
-export const MachiningRequestModelUIFactory = Factory.makeFactory<MachiningRequestModelUI>({
+export const MachiningRequestModelUIFactory =
+  Factory.makeFactory<MachiningRequestModelUI>({
     Filters: MachiningFilterModelUIFactory.build(),
-    Paging: PagingModelUIFactory.build()
-});
+    Paging: PagingModelUIFactory.build(),
+  });
