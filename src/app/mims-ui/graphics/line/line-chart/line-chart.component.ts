@@ -15,7 +15,7 @@ import { MimsUiUtilsService } from "@mimsUI/mims-ui.utils.service";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LineChartComponent implements OnInit, OnChanges {
-  public multi: any[] = [];
+  public multi: any[];
   public showXAxis = true;
   public showYAxis = true;
   public gradient = false;
@@ -29,9 +29,9 @@ export class LineChartComponent implements OnInit, OnChanges {
   };
   public autoScale = true;
   public hasContent = false;
-  @Input() public data: any[] = [];
-  @Input() public xLabelName: string = "";
-  @Input() public yLabelName: string = "";
+  @Input() public data: any[];
+  @Input() public xLabelName: string;
+  @Input() public yLabelName: string;
   @Input() public view: any[] = [700, 400];
 
   public constructor(private mimsUIUtilServices: MimsUiUtilsService) {}

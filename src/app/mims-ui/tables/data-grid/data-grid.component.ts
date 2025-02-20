@@ -18,11 +18,11 @@ import { DataGridCellModel } from "./models/data-grid-cell.model";
 export class DataGridComponent {
   @Output() public changePagination: EventEmitter<number> = new EventEmitter();
 
-  @Input() protected rowData!: DataGridCellModel[];
-  @Input() protected headerName: string[] = [];
-  @Input() protected columName: string[] = [];
-  @Input() protected pageSize: number = 0;
-  @Input() protected totalItems: number = 0;
+  @Input() protected rowData: DataGridCellModel[];
+  @Input() protected headerName: string[];
+  @Input() protected columName: string[];
+  @Input() protected pageSize: number;
+  @Input() protected totalItems: number;
   @Input() protected hasPagination = true;
 
   // tslint:disable-next-line:no-empty

@@ -30,7 +30,7 @@ import {
 })
 export class DatePickerComponent extends BaseControlComponent<Date> {
   @Output() public dateChanged = new EventEmitter<Date>();
-  protected model!: NgModel;
+  protected model: NgModel;
   constructor(
     @Optional() @Inject(NG_VALIDATORS) validators: any[],
     @Optional() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: any[]

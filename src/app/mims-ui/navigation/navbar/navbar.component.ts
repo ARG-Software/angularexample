@@ -18,11 +18,11 @@ import { Subscription } from "rxjs";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit {
-  public contextMenu!: NavBarContextItemModel[];
-  public settings!: NavBarSettingsModel;
+  public contextMenu: NavBarContextItemModel[];
+  public settings: NavBarSettingsModel;
   @Output() public navigate = new EventEmitter();
-  @Input() private menuPath: string = "";
-  private menuSubscription!: Subscription;
+  @Input() private menuPath: string;
+  private menuSubscription: Subscription;
 
   public constructor(
     private navbarService: CommonNavigationService,

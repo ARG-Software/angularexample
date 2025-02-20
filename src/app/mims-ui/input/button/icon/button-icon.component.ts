@@ -6,5 +6,5 @@ import { ButtonBaseComponent } from "@mimsUI/input/button/base/button-base.compo
   templateUrl: "./button-icon.component.html",
 })
 export class ButtonIconComponent extends ButtonBaseComponent {
-  @Input() public icon: string = "";
+  @Input() public icon: string;
 }

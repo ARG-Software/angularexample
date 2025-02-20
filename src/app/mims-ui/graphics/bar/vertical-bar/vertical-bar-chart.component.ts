@@ -15,7 +15,7 @@ import { MimsUiUtilsService } from "../../../mims-ui.utils.service";
 })
 export class VerticalChartBarComponent implements OnChanges {
   public hasContent = false;
-  public multi = [];
+  public multi: any[] = [];
   public view: any[] = [400, 400];
 
   public showXAxis = true;

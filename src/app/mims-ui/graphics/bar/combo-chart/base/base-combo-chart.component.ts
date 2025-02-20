@@ -16,6 +16,7 @@ import {
   Color,
   LineSeriesComponent,
   ScaleType,
+  ViewDimensions,
 } from "@swimlane/ngx-charts";
 import { scaleBand, scaleLinear, scalePoint, scaleTime } from "d3-scale";
 import { calculateViewDimensions, ColorHelper } from "@swimlane/ngx-charts";
@@ -33,7 +34,7 @@ export class BaseComboChartComponent
   implements OnChanges
 {
   @ViewChild(LineSeriesComponent)
-  public lineSeriesComponent!: LineSeriesComponent;
+  public lineSeriesComponent: LineSeriesComponent;
 
   @Input() public curve: any = curveNatural;
   @Input() public legend: boolean = false;
@@ -55,7 +56,7 @@ export class BaseComboChartComponent
   @Input() public yAxisTickFormatting: any;
   @Input() public yRightAxisTickFormatting: any;
   @Input() public roundDomains: boolean = false;
-  @Input() public colorSchemeLine: any[] = [];
+  @Input() public colorSchemeLine: any[];
   @Input() public autoScale: any;
   @Input() public yLeftAxisScaleFactor: any;
   @Input() public yRightAxisScaleFactor: any;
@@ -64,18 +65,18 @@ export class BaseComboChartComponent
   @Output() public activate: EventEmitter<any> = new EventEmitter();
   @Output() public deactivate: EventEmitter<any> = new EventEmitter();
 
-  @ContentChild("tooltipTemplate") public tooltipTemplate!: TemplateRef<any>;
+  @ContentChild("tooltipTemplate") public tooltipTemplate: TemplateRef<any>;
   @ContentChild("seriesTooltipTemplate")
-  public seriesTooltipTemplate!: TemplateRef<any>;
+  public seriesTooltipTemplate: TemplateRef<any>;
 
-  public dims: any;
+  public dims: ViewDimensions;
   public xScale: any;
   public yScale: any;
   public xDomain: any;
   public yDomain: any;
-  public transform: any;
-  public colors: any;
-  public colorsLine: any;
+  public transform: string;
+  public colors: ColorHelper;
+  public colorsLine: ColorHelper;
   public margin: any[] = [10, 20, 10, 20];
   public xAxisHeight: number = 0;
   public yAxisWidth: number = 0;

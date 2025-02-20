@@ -6,5 +6,5 @@ import { ButtonBaseComponent } from "@mimsUI/input/button/base/button-base.compo
   templateUrl: "./button-outline.component.html",
 })
 export class ButtonOutlineComponent extends ButtonBaseComponent {
-  @Input() public buttontype: string = "";
+  @Input() public buttontype: string;
 }

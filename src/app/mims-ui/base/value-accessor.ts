@@ -2,7 +2,7 @@ import { Input } from "@angular/core";
 import { ControlValueAccessor } from "@angular/forms";
 
 export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
-  private _value: T = null as any;
+  private _value: T;
 
   public get value(): T {
     return this._value;

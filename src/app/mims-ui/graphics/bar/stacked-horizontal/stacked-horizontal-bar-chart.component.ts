@@ -6,7 +6,6 @@ import {
   TemplateRef,
 } from "@angular/core";
 import { MimsUiUtilsService } from "../../../mims-ui.utils.service";
-import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "mims-stacked-horizontal-bar-chart",
@@ -17,7 +16,7 @@ export class StackedHorizontalBarChartComponent implements OnChanges {
   public hasContent = false;
 
   @Input() public view: any[] = [700, 400];
-  @Input() public data: any[] = [];
+  @Input() public data: any[];
   @Input() public showXAxis = true;
   @Input() public showYAxis = true;
   @Input() public showLegend = false;
@@ -26,7 +25,7 @@ export class StackedHorizontalBarChartComponent implements OnChanges {
   @Input() public showYAxisLabel = false;
   @Input() public yAxisLabel = "";
   @Input() public timeline = false;
-  @Input() public tooltipTemplate!: TemplateRef<any>;
+  @Input() public tooltipTemplate: TemplateRef<any>;
   @Input() public startDate = new Date(0, 0, 0, 0);
 
   public constructor(private mimsUIUtilServices: MimsUiUtilsService) {}

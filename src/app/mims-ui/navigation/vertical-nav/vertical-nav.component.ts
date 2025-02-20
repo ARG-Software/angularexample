@@ -18,10 +18,10 @@ import { SideBarItemModel } from "@mimsUI/navigation/vertical-nav/models/item.mo
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerticalNavComponent implements OnInit {
-  public menu: any[] = [];
+  public menu: any[];
   @Output() public navigate = new EventEmitter();
-  @Input() private menuPath: string = "";
-  private menuSubscription!: Subscription;
+  @Input() private menuPath: string;
+  private menuSubscription: Subscription;
   public constructor(
     private sideBarService: CommonNavigationService,
     private ref: ChangeDetectorRef
