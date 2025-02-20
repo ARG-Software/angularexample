@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import { IContactMessageDto } from '../../../models/apimodels';
+import { Observable } from "rxjs";
+import { IContactMessageDto } from "../../../models/apimodels";
 
 export abstract class IContactMessageService {
-    public abstract GetContactMessages(): Observable<IContactMessageDto[]>;
+  public abstract GetContactMessages(): Observable<IContactMessageDto[]>;
 }

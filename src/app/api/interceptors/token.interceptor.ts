@@ -3,14 +3,16 @@ import {
   HttpRequest,
   HttpHandler,
   HttpInterceptor,
+  HttpEvent,
 } from "@angular/common/http";
 import { ApiAuthService } from "../services/api-auth.service";
-import { Subject } from "rxjs";
+import { Observable, Subject, EMPTY, throwError } from "rxjs";
+import { switchMap, catchError, tap } from "rxjs/operators";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private refreshTokenInProgress = false;
-  private tokenRefreshedSource = new Subject();
+  private tokenRefreshedSource = new Subject<void>();
   private tokenRefreshed$ = this.tokenRefreshedSource.asObservable();
   private apiAuth: ApiAuthService;
 
@@ -19,44 +21,49 @@ export class TokenInterceptor implements HttpInterceptor {
   public intercept(
     request: HttpRequest<any>,
     next: HttpHandler
-  ): Observable<any> {
+  ): Observable<HttpEvent<any>> {
     this.apiAuth = this.injector.get(ApiAuthService);
     request = this.apiAuth.addAuthHeader(request);
-    return next.handle(request).catch((error) => {
-      switch (error.status) {
-        case 401:
-          return this.refreshToken()
-            .switchMap((token: string) => {
-              this.apiAuth.updateAccessToken(token);
-              request = this.apiAuth.addAuthHeader(request);
-              return next.handle(request);
-            })
-            .catch(() => {
-              this.apiAuth.logout();
-              return Observable.empty();
-            });
-      }
 
-      return Observable.throw(error);
-    });
+    return next.handle(request).pipe(
+      catchError((error) => {
+        switch (error.status) {
+          case 401:
+            return this.refreshToken().pipe(
+              switchMap((token: string) => {
+                this.apiAuth.updateAccessToken(token);
+                request = this.apiAuth.addAuthHeader(request);
+                return next.handle(request);
+              }),
+              catchError(() => {
+                this.apiAuth.logout();
+                return EMPTY;
+              })
+            );
+        }
+
+        return throwError(() => error);
+      })
+    );
   }
 
   private refreshToken(): Observable<any> {
     if (this.refreshTokenInProgress) {
       return new Observable((observer) => {
         this.tokenRefreshed$.subscribe(() => {
-          observer.next();
+          observer.next(null);
           observer.complete();
         });
       });
     } else {
       this.refreshTokenInProgress = true;
 
-      return this.apiAuth.getNewAccessToken().do(() => {
-        this.refreshTokenInProgress = false;
-        this.tokenRefreshedSource.next();
-        // this.apiAuth.updateAccessToken(data as string);
-      });
+      return this.apiAuth.getNewAccessToken().pipe(
+        tap(() => {
+          this.refreshTokenInProgress = false;
+          this.tokenRefreshedSource.next();
+        })
+      );
     }
   }
 }

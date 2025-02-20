@@ -1,14 +1,13 @@
-import { BaseMimsApi } from '../../classes/base/base.mims.api';
-import { Injectable, Injector } from '@angular/core';
-import { IMoteDto } from '../../../models/apimodels';
-import { Observable } from 'rxjs/Observable';
-import { IMoteService } from '@api/services/interfaces/core/imote.service';
-import { HttpClient } from '@angular/common/http';
+import { BaseMimsApi } from "../../classes/base/base.mims.api";
+import { Injectable, Injector } from "@angular/core";
+import { IMoteDto } from "../../../models/apimodels";
+import { Observable } from "rxjs";
+import { IMoteService } from "@api/services/interfaces/core/imote.service";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
-export class MoteService extends BaseMimsApi
-  implements IMoteService {
-  private controllerRoute = 'Mote';
+export class MoteService extends BaseMimsApi implements IMoteService {
+  private controllerRoute = "Mote";
 
   constructor(private injector: Injector, private http: HttpClient) {
     super(injector, http);

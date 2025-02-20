@@ -1,20 +1,22 @@
-import { BaseMimsApi } from '../../classes/base/base.mims.api';
-import { Injectable, Injector } from '@angular/core';
-import { IElectricalContactDto } from '../../../models/apimodels';
-import { Observable } from 'rxjs/Observable';
-import { IElectricalConcactService } from '@api/services/interfaces/core/ielectricalcontact.service';
-import { HttpClient } from '@angular/common/http';
+import { BaseMimsApi } from "../../classes/base/base.mims.api";
+import { Injectable, Injector } from "@angular/core";
+import { IElectricalContactDto } from "../../../models/apimodels";
+import { Observable } from "rxjs";
+import { IElectricalConcactService } from "@api/services/interfaces/core/ielectricalcontact.service";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
-export class ElectricalContactService extends BaseMimsApi
-  implements IElectricalConcactService {
-  private controllerRoute = 'ElectricalContact';
+export class ElectricalContactService
+  extends BaseMimsApi
+  implements IElectricalConcactService
+{
+  private controllerRoute = "ElectricalContact";
 
   constructor(private injector: Injector, private http: HttpClient) {
     super(injector, http);
   }
 
-  public AddEC( ec: IElectricalContactDto): Observable<IElectricalContactDto> {
+  public AddEC(ec: IElectricalContactDto): Observable<IElectricalContactDto> {
     return this.insertObject(ec, `${this.controllerRoute}`);
   }
   public DeleteEC(ecId: number): Observable<boolean> {
