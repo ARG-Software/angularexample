@@ -5,11 +5,11 @@ import {
   Output,
   EventEmitter,
 } from "@angular/core";
-import { PagingModelUI } from "../../../../../../app.models";
 import {
   DowntimeTableDataModelUI,
   ComboChartDataModelUI,
 } from "../../../../models/downtime.models";
+import { PagingModelUI } from "src/app/app.models";
 
 @Component({
   selector: "downtime-information",
@@ -24,7 +24,7 @@ export class DowntimeInformationComponent {
   @Input() protected chartColors: any;
   @Input() protected chartSize: any;
   @Input() protected tableHeaders: any;
-  @Input() protected paginationDetails: PagingModelUI;
+  @Input() protected paginationDetails!: PagingModelUI;
 
   private changePagination(pageNumber: number) {
     this.changePage.emit(pageNumber);
