@@ -26,23 +26,23 @@ export interface KanbanDataModelUI extends BufferModelUI {
 }
 
 export const WipDataModelUIFactory = Factory.makeFactory<WipDataModelUI>({
-  Id: faker.random.number(),
-  ProductId: faker.random.number(),
-  Name: faker.random.word(),
-  Count: faker.random.number(),
-  LowAlertLowWarning: faker.random.number(),
-  LowWarningTarget: faker.random.number(),
-  TargetHighWarning: faker.random.number(),
-  HighWarningHighAlert: faker.random.number(),
+  Id: faker.number.int(),
+  ProductId: faker.number.int(),
+  Name: faker.word.noun(),
+  Count: faker.number.int(),
+  LowAlertLowWarning: faker.number.int(),
+  LowWarningTarget: faker.number.int(),
+  TargetHighWarning: faker.number.int(),
+  HighWarningHighAlert: faker.number.int(),
 });
 
 export const KanbanDataModelUIFactory = Factory.makeFactory<KanbanDataModelUI>({
-  Id: faker.random.number(),
-  ProductId: faker.random.number(),
-  Count: faker.random.number(),
-  Name: faker.random.word(),
-  LowAlertLowWarning: faker.random.number(),
-  LowWarningTarget: faker.random.number(),
-  TargetHighWarning: faker.random.number(),
-  HighWarningHighAlert: faker.random.number(),
+  Id: faker.number.int(),
+  ProductId: faker.number.int(),
+  Count: faker.number.int(),
+  Name: faker.word.noun(),
+  LowAlertLowWarning: faker.number.int(),
+  LowWarningTarget: faker.number.int(),
+  TargetHighWarning: faker.number.int(),
+  HighWarningHighAlert: faker.number.int(),
 });

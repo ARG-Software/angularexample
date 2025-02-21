@@ -18,23 +18,23 @@ export interface MachineOperationsRequestModel {
 }
 
 export const ChartSeriesModelUIFactory = Factory.makeFactory<ChartSeriesModel>({
-  name: faker.random.word(),
-  value: faker.random.number(),
+  name: faker.word.noun(),
+  value: faker.number.int(),
 });
 
 export const DownTimeRecordChartModelUIFactory =
   Factory.makeFactory<DownTimeRecordChartModel>({
-    name: faker.random.word(),
+    name: faker.word.noun(),
     series: ChartSeriesModelUIFactory.buildList(2),
   });
 
 export const DownTimeStatisticsChartRequestModelUIFactory =
   Factory.makeFactory<DownTimeStatisticsChartRequestModel>({
-    productId: faker.random.number(),
+    productId: faker.number.int(),
     startDate: faker.date.recent(),
   });
 
 export const MachineOperationsRequestModelUIFactory =
   Factory.makeFactory<MachineOperationsRequestModel>({
-    productId: faker.random.number(),
+    productId: faker.number.int(),
   });

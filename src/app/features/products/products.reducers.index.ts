@@ -1,9 +1,9 @@
-import * as fromOverviewReducerDefinition from './reducers/overview.reducers';
-import * as fromSettingsReducerDefinition from './reducers/settings.reducers';
-import * as fromConfigureReducerDefiniton from './reducers/configure.reducers';
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import * as fromOverviewReducerDefinition from "./reducers/overview.reducers";
+import * as fromSettingsReducerDefinition from "./reducers/settings.reducers";
+import * as fromConfigureReducerDefiniton from "./reducers/configure.reducers";
+import { createSelector, createFeatureSelector } from "@ngrx/store";
 
-export const reducerName = 'products';
+export const reducerName = "products";
 
 export interface ProductState {
   overview: fromOverviewReducerDefinition.OverviewState;
@@ -11,10 +11,10 @@ export interface ProductState {
   configure: fromConfigureReducerDefiniton.ConfigureState;
 }
 
-export const reducers = {
+export const reducers: any = {
   overview: fromOverviewReducerDefinition.reducer,
   settings: fromSettingsReducerDefinition.reducer,
-  configure: fromConfigureReducerDefiniton.reducer
+  configure: fromConfigureReducerDefiniton.reducer,
 };
 
 const getProductsState = createFeatureSelector<ProductState>(reducerName);
@@ -58,78 +58,93 @@ export const getWipData = createSelector(
 );
 
 export const getKanBanData = createSelector(
-    getSettingstate,
-    fromSettingsReducerDefinition.getKanbanData
+  getSettingstate,
+  fromSettingsReducerDefinition.getKanbanData
 );
 
 // Configure
 
 const getConfigureState = createSelector(
-  getProductsState, (state) => state.configure);
+  getProductsState,
+  (state) => state.configure
+);
 
 export const getMachineSelectBox = createSelector(
   getConfigureState,
-  fromConfigureReducerDefiniton.getMachineSelectBox);
+  fromConfigureReducerDefiniton.getMachineSelectBox
+);
 
 export const getEdgeSelectBox = createSelector(
-    getConfigureState,
-    fromConfigureReducerDefiniton.getEdgesSelectBox);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getEdgesSelectBox
+);
 
 export const getMotesSelectBox = createSelector(
-    getConfigureState,
-    fromConfigureReducerDefiniton.getMoteSelectBox);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getMoteSelectBox
+);
 
 export const getOperationsSelectBox = createSelector(
-      getConfigureState,
-      fromConfigureReducerDefiniton.getOperationsSelectBox);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getOperationsSelectBox
+);
 
 export const getSubContractorsSelectBox = createSelector(
-        getConfigureState,
-        fromConfigureReducerDefiniton.getSubContractorsSelectBox);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getSubContractorsSelectBox
+);
 
 export const getMessagesSelectBox = createSelector(
-          getConfigureState,
-          fromConfigureReducerDefiniton.getMessagesSelectBox);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getMessagesSelectBox
+);
 
 export const getProductDetail = createSelector(
-            getConfigureState,
-            fromConfigureReducerDefiniton.getProductDetail);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getProductDetail
+);
 
 export const getOperationsDetails = createSelector(
-              getConfigureState,
-              fromConfigureReducerDefiniton.getOperationsDetails);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getOperationsDetails
+);
 
 export const getOperationsUpdateState = createSelector(
-            getConfigureState,
-            fromConfigureReducerDefiniton.getOperationsUpdateState
+  getConfigureState,
+  fromConfigureReducerDefiniton.getOperationsUpdateState
 );
 
 export const getMachineOperationsDetails = createSelector(
-              getConfigureState,
-              fromConfigureReducerDefiniton.getMachineOperationsDetails);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getMachineOperationsDetails
+);
 
 export const getMachineOperationsUpdateState = createSelector(
-              getConfigureState,
-              fromConfigureReducerDefiniton.getMachineOperationsUpdateState
+  getConfigureState,
+  fromConfigureReducerDefiniton.getMachineOperationsUpdateState
 );
 
 export const getMotesDetails = createSelector(
-                  getConfigureState,
-                  fromConfigureReducerDefiniton.getMotesDetails);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getMotesDetails
+);
 
 export const getMotesUpdateState = createSelector(
-                 getConfigureState,
-                 fromConfigureReducerDefiniton.getMotesUpdateState);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getMotesUpdateState
+);
 
 export const getSensorsDetails = createSelector(
-              getConfigureState,
-              fromConfigureReducerDefiniton.getSensorsDetails);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getSensorsDetails
+);
 
 export const getSensorUpdateState = createSelector(
-    getConfigureState,
-    fromConfigureReducerDefiniton.getSensorUpdateState);
+  getConfigureState,
+  fromConfigureReducerDefiniton.getSensorUpdateState
+);
 
 export const getResumePage = createSelector(
-    getConfigureState,
-    fromConfigureReducerDefiniton.getResumePageState
+  getConfigureState,
+  fromConfigureReducerDefiniton.getResumePageState
 );

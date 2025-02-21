@@ -1,13 +1,26 @@
-import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, AbstractControl } from '@angular/forms';
-import { MimsFormErrorsService } from '@mimsUI/forms/wizard/services/errors.service';
-import { MimsValidator } from '@mimsUI/forms/wizard/services/validators';
-import { ProductModelUI } from '../../../models/configure.model';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  ChangeDetectionStrategy,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  AbstractControl,
+} from "@angular/forms";
+import { MimsFormErrorsService } from "@mimsUI/forms/wizard/services/errors.service";
+import { MimsValidator } from "@mimsUI/forms/wizard/services/validators";
+import { ProductModelUI } from "../../../models/configure.model";
 
 @Component({
-  selector: 'product-wizard-page',
-  templateUrl: './product-wizard.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: "product-wizard-page",
+  templateUrl: "./product-wizard.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductWizardComponent implements OnChanges {
   public productsForm: FormGroup;
@@ -15,23 +28,46 @@ export class ProductWizardComponent implements OnChanges {
   @Output() public updateProduct = new EventEmitter();
 
   protected errors: any[] = [];
-  protected get name(): AbstractControl { return this.productsForm.get('Name'); }
-  protected get targetHoursPerWeek(): AbstractControl { return this.productsForm.get('TargetHoursPerWeek'); }
-  protected get targetEfficiency(): AbstractControl { return this.productsForm.get('TargetEfficiency'); }
+  protected get name(): AbstractControl {
+    return this.productsForm.get("Name");
+  }
+  protected get targetHoursPerWeek(): AbstractControl {
+    return this.productsForm.get("TargetHoursPerWeek");
+  }
+  protected get targetEfficiency(): AbstractControl {
+    return this.productsForm.get("TargetEfficiency");
+  }
 
-  constructor(private formBuilder: FormBuilder, private formErrorService: MimsFormErrorsService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private formErrorService: MimsFormErrorsService
+  ) {
     this.productsForm = this.formBuilder.group({
-      Name: new FormControl('', [MimsValidator.required , MimsValidator.minLength(6)]),
-      TargetHoursPerWeek: new FormControl('',
-        [MimsValidator.required, MimsValidator.isNumber, MimsValidator.max(80), MimsValidator.min(0)]),
-      TargetEfficiency: new FormControl('', [MimsValidator.required, MimsValidator.isNumber, MimsValidator.max(100), MimsValidator.min(0)], )
+      Name: new FormControl("", [
+        MimsValidator.required,
+        MimsValidator.minLength(6),
+      ]),
+      TargetHoursPerWeek: new FormControl("", [
+        MimsValidator.required,
+        MimsValidator.isNumber,
+        MimsValidator.max(80),
+        MimsValidator.min(0),
+      ]),
+      TargetEfficiency: new FormControl("", [
+        MimsValidator.required,
+        MimsValidator.isNumber,
+        MimsValidator.max(100),
+        MimsValidator.min(0),
+      ]),
     });
-   }
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    const productDetail = (changes.productDetailsData !== null
-      && changes.productDetailsData !== undefined )
-     ? changes.productDetailsData.currentValue : null;
+    const productDetail =
+      changes["productDetailsData"] !== null &&
+      changes["productDetailsData"] !== undefined
+        ? changes["productDetailsData"].currentValue
+        : null;
     if (productDetail) {
       this.productsForm.patchValue(productDetail);
     }
@@ -46,19 +82,24 @@ export class ProductWizardComponent implements OnChanges {
         Id: 0,
         Name: this.name.value,
         TargetEfficiency: this.targetEfficiency.value,
-        TargetHoursPerWeek: this.targetHoursPerWeek.value
-    };
+        TargetHoursPerWeek: this.targetHoursPerWeek.value,
+      };
       this.updateProduct.emit(updatedProduct);
     }
   }
 
   private getFormErrors(): void {
-      const formControlNameAlias = {
-        Name: 'Name',
-        TargetHoursPerWeek: 'Target Hours Per Week',
-        TargetEfficiency: 'Target Efficiency'
-      };
-      const errors = this.formErrorService.getFormGroupValidationErrors(this.productsForm);
-      this.errors = this.formErrorService.displayFormErrors(formControlNameAlias, errors);
-    }
+    const formControlNameAlias = {
+      Name: "Name",
+      TargetHoursPerWeek: "Target Hours Per Week",
+      TargetEfficiency: "Target Efficiency",
+    };
+    const errors = this.formErrorService.getFormGroupValidationErrors(
+      this.productsForm
+    );
+    this.errors = this.formErrorService.displayFormErrors(
+      formControlNameAlias,
+      errors
+    );
+  }
 }
