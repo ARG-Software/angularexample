@@ -1,55 +1,66 @@
 import {
-    MessagingActionTypes,
-    MessagingActions
-} from '../actions/messaging.actions';
+  MessagingActionTypes,
+  MessagingActions,
+} from "../actions/messaging.actions";
 import {
-    MessagingLoadDataModelUI,
-    MessagingSaveDataModelUI
-} from '../models/messaging.model';
+  MessagingLoadDataModelUI,
+  MessagingSaveDataModelUI,
+} from "../models/messaging.model";
 
 export interface MessagingState {
-    messagingData: MessagingLoadDataModelUI[];
-    messagingToSave: MessagingSaveDataModelUI[];
+  messagingData: MessagingLoadDataModelUI[];
+  messagingToSave: MessagingSaveDataModelUI[];
 }
 
 export const initialState: MessagingState = {
-    messagingData: [],
-    messagingToSave: []
+  messagingData: [],
+  messagingToSave: [],
 };
 
-export function reducer(state: MessagingState = initialState, action: MessagingActions): MessagingState {
-
-    switch (action.type) {
-
-        case MessagingActionTypes.GetMessagingDataSuccess: {
-            return {
-                ...state,
-                messagingData: action.payload
-            };
-        }
-
-        case MessagingActionTypes.ChangeCheckbox: {
-            return {
-                ...state,
-                messagingToSave: findAndUpdateMessagingToSave(state.messagingToSave, state.messagingData, action.payload)
-            };
-        }
-
-        case MessagingActionTypes.ChangeSelectbox: {
-            return {
-                ...state,
-                messagingData: updateOptionLoadData(state.messagingData, action.payload),
-                messagingToSave: updateOptionSaveData(state.messagingToSave, action.payload)
-            };
-        }
-
-        case MessagingActionTypes.UpdateMessagingDataSuccess: {
-            return state;
-        }
-
-        default:
-            return state;
+export function reducer(
+  state: MessagingState = initialState,
+  action: MessagingActions
+): MessagingState {
+  switch (action.type) {
+    case MessagingActionTypes.GetMessagingDataSuccess: {
+      return {
+        ...state,
+        messagingData: action.payload,
+      };
     }
+
+    case MessagingActionTypes.ChangeCheckbox: {
+      return {
+        ...state,
+        messagingToSave: findAndUpdateMessagingToSave(
+          state.messagingToSave,
+          state.messagingData,
+          action.payload
+        ),
+      };
+    }
+
+    case MessagingActionTypes.ChangeSelectbox: {
+      return {
+        ...state,
+        messagingData: updateOptionLoadData(
+          state.messagingData,
+          action.payload
+        ),
+        messagingToSave: updateOptionSaveData(
+          state.messagingToSave,
+          action.payload
+        ),
+      };
+    }
+
+    case MessagingActionTypes.UpdateMessagingDataSuccess: {
+      return state;
+    }
+
+    default:
+      return state;
+  }
 }
 
 /**
@@ -58,17 +69,20 @@ export function reducer(state: MessagingState = initialState, action: MessagingA
  * @param obj object with the messaging Id and with the new option
  */
 export function updateOptionLoadData(messagingData: any[], obj: any) {
-    const messagingToUpdate = Object.assign({},
-        messagingData.find((elem) => {
-            return elem.Id === obj.Id;
-        })
-    );
+  const messagingToUpdate = Object.assign(
+    {},
+    messagingData.find((elem) => {
+      return elem.Id === obj.Id;
+    })
+  );
 
-    messagingToUpdate['Options'].forEach((elem) => {
-        (elem.value === obj.Option.value) ? elem.selected = true : elem.selected = false;
-    });
+  messagingToUpdate["Options"].forEach((elem: any) => {
+    elem.value === obj.Option.value
+      ? (elem.selected = true)
+      : (elem.selected = false);
+  });
 
-    return messagingData;
+  return messagingData;
 }
 
 /**
@@ -77,18 +91,17 @@ export function updateOptionLoadData(messagingData: any[], obj: any) {
  * @param obj object with the messaging Id and with the new option
  */
 export function updateOptionSaveData(messagingToSave: any[], obj: any) {
-
-    if (messagingToSave.length === 0) {
-        return messagingToSave;
-    }
-
-    messagingToSave.forEach((elem) => {
-        if (elem.Id === obj.Id) {
-            elem.Option = obj.Option;
-        }
-    });
-
+  if (messagingToSave.length === 0) {
     return messagingToSave;
+  }
+
+  messagingToSave.forEach((elem) => {
+    if (elem.Id === obj.Id) {
+      elem.Option = obj.Option;
+    }
+  });
+
+  return messagingToSave;
 }
 
 /**
@@ -97,23 +110,22 @@ export function updateOptionSaveData(messagingToSave: any[], obj: any) {
  * @param messaging messagin to update
  */
 export function findAndUpdateMessagingToSave(
-    messagingToSaveState: MessagingSaveDataModelUI[],
-    messagingDataState: MessagingLoadDataModelUI[],
-    payload: number
+  messagingToSaveState: MessagingSaveDataModelUI[],
+  messagingDataState: MessagingLoadDataModelUI[],
+  payload: number
 ): MessagingSaveDataModelUI[] {
+  const messagingSave = Object.assign([], messagingToSaveState);
+  const messagingData = Object.assign([], messagingDataState);
 
-    const messagingSave = Object.assign([], messagingToSaveState);
-    const messagingData = Object.assign([], messagingDataState);
+  const index = messagingSave.findIndex((elem) => {
+    return elem.Id === payload;
+  });
 
-    const index = messagingSave.findIndex((elem) => {
-        return elem.Id === payload;
-    });
+  index > -1
+    ? messagingSave.splice(index, 1)
+    : messagingSave.push(convertDataToSave(messagingData, payload));
 
-    (index > -1) ? messagingSave.splice(index, 1) : messagingSave.push(
-        convertDataToSave(messagingData, payload)
-    );
-
-    return messagingSave;
+  return messagingSave;
 }
 
 /**
@@ -121,21 +133,23 @@ export function findAndUpdateMessagingToSave(
  * @param messagingData Array with messaging data
  * @param messagingId id of the messagign to convert to be saved in backend
  */
-export function convertDataToSave(messagingData: MessagingLoadDataModelUI[], messagingId: number): MessagingSaveDataModelUI {
+export function convertDataToSave(
+  messagingData: MessagingLoadDataModelUI[],
+  messagingId: number
+): MessagingSaveDataModelUI {
+  let convertedMessaging: MessagingSaveDataModelUI;
+  const toConvert = messagingData.find((elem) => {
+    return elem.Id === messagingId;
+  });
 
-    let convertedMessaging: MessagingSaveDataModelUI;
-    const toConvert = messagingData.find((elem) => {
-        return elem.Id === messagingId;
-    });
+  convertedMessaging = {
+    Id: messagingId,
+    Option: toConvert.Options.find((elem) => {
+      return elem.selected === true;
+    }),
+  };
 
-    convertedMessaging = {
-        Id: messagingId,
-        Option: toConvert.Options.find((elem) => {
-            return elem.selected === true;
-        })
-    };
-
-    return convertedMessaging;
+  return convertedMessaging;
 }
 
 /*
@@ -145,4 +159,5 @@ export function convertDataToSave(messagingData: MessagingLoadDataModelUI[], mes
 
 export const getMessagingData = (state: MessagingState) => state.messagingData;
 
-export const getMessagingToSave = (state: MessagingState) => state.messagingToSave;
+export const getMessagingToSave = (state: MessagingState) =>
+  state.messagingToSave;

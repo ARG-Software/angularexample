@@ -22,20 +22,20 @@ export interface MessagingRequestModelUI {
 
 export const MessagingLoadDataModelUIFactory =
   Factory.makeFactory<MessagingLoadDataModelUI>({
-    Id: faker.random.number(),
-    DowntimeName: faker.random.word(),
-    Duration: faker.random.number(),
-    StartTime: faker.random.word(),
-    EndTime: faker.random.word(),
+    Id: faker.number.int(),
+    DowntimeName: faker.word.sample(),
+    Duration: faker.number.int(),
+    StartTime: faker.date.recent().toISOString(),
+    EndTime: faker.date.recent().toISOString(),
     Options: [
       {
-        value: faker.random.number(),
-        name: faker.random.word(),
+        value: faker.number.int(),
+        name: faker.word.sample(),
         selected: false,
       },
       {
-        value: faker.random.number(),
-        name: faker.random.word(),
+        value: faker.number.int(),
+        name: faker.word.sample(),
         selected: true,
       },
     ],
@@ -43,15 +43,15 @@ export const MessagingLoadDataModelUIFactory =
 
 export const MessagingSaveDataModelUIFactory =
   Factory.makeFactory<MessagingSaveDataModelUI>({
-    Id: faker.random.number(),
+    Id: faker.number.int(),
     Option: {
-      value: faker.random.number(),
-      name: faker.random.word(),
-      selected: faker.random.boolean(),
+      value: faker.number.int(),
+      name: faker.word.sample(),
+      selected: faker.datatype.boolean(),
     },
   }).build();
 
 export const MessagingRequestModelUIFactory =
   Factory.makeFactory<MessagingRequestModelUI>({
-    Id: faker.random.number(),
+    Id: faker.number.int(),
   }).build();

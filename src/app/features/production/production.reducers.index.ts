@@ -1,44 +1,46 @@
-import * as fromMachineReducerDefinition from './reducers/machine-state.reducer';
-import * as fromMessagingReducerDefinition from './reducers/messasing.reducer';
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import {
+  ActionReducerMap,
+  createSelector,
+  createFeatureSelector,
+} from "@ngrx/store";
+import * as fromMachineReducer from "./reducers/machine-state.reducer";
+import * as fromMessagingReducer from "./reducers/messasing.reducer";
 
-export const reducerName = 'production';
+export const reducerName = "production";
 
 export interface ProductionState {
-    machine: fromMachineReducerDefinition.MachineState;
-    messaging: fromMessagingReducerDefinition.MessagingState;
+  machine: fromMachineReducer.MachineState;
+  messaging: fromMessagingReducer.MessagingState;
 }
 
-export const reducers = {
-    machine: fromMachineReducerDefinition.reducer,
-    messaging: fromMessagingReducerDefinition.reducer
+export const reducers: ActionReducerMap<ProductionState> = {
+  machine: fromMachineReducer.reducer as any,
+  messaging: fromMessagingReducer.reducer as any,
 };
 
 const getProductionState = createFeatureSelector<ProductionState>(reducerName);
 
-// Machine State
 const getMachineState = createSelector(
-    getProductionState,
-    (state) => state.machine
+  getProductionState,
+  (state) => state.machine
 );
 
 export const getMachineData = createSelector(
-    getMachineState,
-    (state) => state.machineData
+  getMachineState,
+  (state) => state.machineData
 );
 
-// Messaging
-const getMessaging = createSelector(
-    getProductionState,
-    (state) => state.messaging
+const getMessagingState = createSelector(
+  getProductionState,
+  (state) => state.messaging
 );
 
 export const getMessagingData = createSelector(
-    getMessaging,
-    (state) => state.messagingData
+  getMessagingState,
+  (state) => state.messagingData
 );
 
 export const getMessagingToSave = createSelector(
-    getMessaging,
-    (state) => state.messagingToSave
+  getMessagingState,
+  (state) => state.messagingToSave
 );
