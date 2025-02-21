@@ -5,7 +5,6 @@ import { reducerName, mainReducers } from "./main.reducers.index";
 import { RouterModule } from "@angular/router";
 import { MainComponent } from "./main.component";
 import { MimsUIModule } from "@mimsUI/mims-ui.module";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 const MainRoutingModule = RouterModule.forChild([
   {
@@ -14,17 +13,24 @@ const MainRoutingModule = RouterModule.forChild([
     children: [
       {
         path: "products",
-        loadChildren: "../features/products/products.module#ProductsModule",
+        loadChildren: () =>
+          import("../features/products/products.module").then(
+            (m) => m.ProductsModule
+          ),
       },
       {
         path: "data-warehouse",
-        loadChildren:
-          "../features/data-warehouse/data-warehouse.module#DataWarehouseModule",
+        loadChildren: () =>
+          import("../features/data-warehouse/data-warehouse.module").then(
+            (m) => m.DataWarehouseModule
+          ),
       },
       {
         path: "production",
-        loadChildren:
-          "../features/production/production.module#ProductionModule",
+        loadChildren: () =>
+          import("../features/production/production.module").then(
+            (m) => m.ProductionModule
+          ),
       },
     ],
   },
