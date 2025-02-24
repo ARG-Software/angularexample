@@ -10,6 +10,7 @@ import {
 } from "../../models/overview.models";
 
 @Component({
+  standalone: false,
   templateUrl: "overview.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

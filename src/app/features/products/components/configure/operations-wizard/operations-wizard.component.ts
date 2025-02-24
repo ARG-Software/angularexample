@@ -1,14 +1,30 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
-import { MimsValidator } from '@mimsUI/forms/wizard/services/validators';
-import { MimsFormErrorsService } from '@mimsUI/forms/wizard/services/errors.service';
-import {  OperationModelUI, ConfigureSelectBoxModelUI, SubcontractorModelUI } from '../../../models/configure.model';
-import { MimsSelectBoxModel } from '@mimsUI/input/select-box/models/select-box.model';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  AbstractControl,
+} from "@angular/forms";
+import { MimsValidator } from "@mimsUI/forms/wizard/services/validators";
+import { MimsFormErrorsService } from "@mimsUI/forms/wizard/services/errors.service";
+import {
+  OperationModelUI,
+  ConfigureSelectBoxModelUI,
+  SubcontractorModelUI,
+} from "../../../models/configure.model";
+import { MimsSelectBoxModel } from "@mimsUI/input/select-box/models/select-box.model";
 
 @Component({
-  selector: 'operations-wizard-page',
-  templateUrl: './operations-wizard.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  standalone: false,
+  selector: "operations-wizard-page",
+  templateUrl: "./operations-wizard.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OperationsWizardComponent {
   @Input() public operationsList: OperationModelUI[];
@@ -19,41 +35,60 @@ export class OperationsWizardComponent {
 
   protected errors: any[] = [];
 
-  protected get opNumber(): AbstractControl { return this.operationForm.get('opNumber'); }
-  protected get description(): AbstractControl { return this.operationForm.get('description'); }
-  protected get subcontractor(): AbstractControl { return this.operationForm.get('subcontractor'); }
+  protected get opNumber(): AbstractControl {
+    return this.operationForm.get("opNumber");
+  }
+  protected get description(): AbstractControl {
+    return this.operationForm.get("description");
+  }
+  protected get subcontractor(): AbstractControl {
+    return this.operationForm.get("subcontractor");
+  }
   protected get subcontractorCovertedToModel(): SubcontractorModelUI {
-    const subcontractorSelected = this.operationForm.get('subcontractor').value as any as MimsSelectBoxModel;
+    const subcontractorSelected = this.operationForm.get("subcontractor")
+      .value as any as MimsSelectBoxModel;
     const subContractorConvertedModel: SubcontractorModelUI = {
-       Id : subcontractorSelected.value as number,
-       Name : subcontractorSelected.name
+      Id: subcontractorSelected.value as number,
+      Name: subcontractorSelected.name,
     };
     return subContractorConvertedModel;
   }
 
-  public constructor(private formBuilder: FormBuilder, private formErrorService: MimsFormErrorsService) {
+  public constructor(
+    private formBuilder: FormBuilder,
+    private formErrorService: MimsFormErrorsService
+  ) {
     this.operationForm = this.formBuilder.group({
-      opNumber: new FormControl('', [MimsValidator.required, MimsValidator.isNumber, MimsValidator.min(1), MimsValidator.max(99)]),
-      description: new FormControl('', [MimsValidator.required, MimsValidator.min(10)]),
-      subcontractor: new FormControl('')
+      opNumber: new FormControl("", [
+        MimsValidator.required,
+        MimsValidator.isNumber,
+        MimsValidator.min(1),
+        MimsValidator.max(99),
+      ]),
+      description: new FormControl("", [
+        MimsValidator.required,
+        MimsValidator.min(10),
+      ]),
+      subcontractor: new FormControl(""),
     });
   }
 
   protected onAddOperation(): void {
-  if (!this.operationForm.invalid) {
-    const addedOperation: OperationModelUI = {
+    if (!this.operationForm.invalid) {
+      const addedOperation: OperationModelUI = {
         Id: 0,
         ProductId: undefined,
         Description: this.description.value as string,
         Number: this.opNumber.value as number,
-        Subcontractor: this.subcontractorCovertedToModel as SubcontractorModelUI
-    };
-    this.addOperation.emit(addedOperation);
-    // this.resetFormFields();
-    this.errors = [];
-  } else {
-    this.getFormErrors();
-  }
+        Subcontractor: this
+          .subcontractorCovertedToModel as SubcontractorModelUI,
+      };
+      this.addOperation.emit(addedOperation);
+      // this.resetFormFields();
+      this.errors = [];
+    } else {
+      this.getFormErrors();
+    }
   }
 
   protected onRemoveOperation(operation: OperationModelUI): void {
@@ -61,20 +96,25 @@ export class OperationsWizardComponent {
   }
   private getFormErrors(): void {
     const formControlNameAlias = {
-      opNumber: 'Op Num',
-      description: 'Description',
-      subcontractor: 'SubContractor'
+      opNumber: "Op Num",
+      description: "Description",
+      subcontractor: "SubContractor",
     };
-    const errors = this.formErrorService.getFormGroupValidationErrors(this.operationForm);
-    this.errors = this.formErrorService.displayFormErrors(formControlNameAlias, errors);
+    const errors = this.formErrorService.getFormGroupValidationErrors(
+      this.operationForm
+    );
+    this.errors = this.formErrorService.displayFormErrors(
+      formControlNameAlias,
+      errors
+    );
   }
 
   private resetFormFields(): void {
     this.description.reset();
-    this.description.setValue('');
+    this.description.setValue("");
     this.opNumber.reset();
-    this.opNumber.setValue('');
+    this.opNumber.setValue("");
     this.subcontractor.reset();
-    this.subcontractor.setValue('');
+    this.subcontractor.setValue("");
   }
 }

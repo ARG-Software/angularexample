@@ -18,6 +18,7 @@ import { MimsValidator } from "@mimsUI/forms/wizard/services/validators";
 import { ProductModelUI } from "../../../models/configure.model";
 
 @Component({
+  standalone: false,
   selector: "product-wizard-page",
   templateUrl: "./product-wizard.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,

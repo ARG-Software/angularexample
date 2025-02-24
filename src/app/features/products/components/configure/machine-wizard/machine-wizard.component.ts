@@ -1,14 +1,26 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { MimsSelectBoxModel } from '@mimsUI/input/select-box/models/select-box.model';
-import { FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { MimsFormErrorsService } from '@mimsUI/forms/wizard/services/errors.service';
-import { MimsValidator } from '@mimsUI/forms/wizard/services/validators';
-import { MachineOperationModelUI } from '../../../models/configure.model';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from "@angular/core";
+import { MimsSelectBoxModel } from "@mimsUI/input/select-box/models/select-box.model";
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  AbstractControl,
+} from "@angular/forms";
+import { MimsFormErrorsService } from "@mimsUI/forms/wizard/services/errors.service";
+import { MimsValidator } from "@mimsUI/forms/wizard/services/validators";
+import { MachineOperationModelUI } from "../../../models/configure.model";
 
 @Component({
-  selector: 'machine-wizard-page',
-  templateUrl: './machine-wizard.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  standalone: false,
+  selector: "machine-wizard-page",
+  templateUrl: "./machine-wizard.component.html",
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MachineWizardComponent {
   @Input() public machineSelectBoxData: MimsSelectBoxModel[];
@@ -19,24 +31,46 @@ export class MachineWizardComponent {
   public machinesForm: FormGroup;
   protected errors: any[] = [];
 
-  public constructor(private formBuilder: FormBuilder, private formErrorService: MimsFormErrorsService) {
+  public constructor(
+    private formBuilder: FormBuilder,
+    private formErrorService: MimsFormErrorsService
+  ) {
     this.machinesForm = this.formBuilder.group({
-      machine: new FormControl('', [MimsValidator.required ]),
-      operation: new FormControl('', [MimsValidator.required]),
-      oee: new FormControl('', [MimsValidator.required, MimsValidator.min(1), MimsValidator.max(1000)]),
-      mde: new FormControl('', [MimsValidator.required, MimsValidator.isNumber, MimsValidator.min(1), MimsValidator.max(60)])
+      machine: new FormControl("", [MimsValidator.required]),
+      operation: new FormControl("", [MimsValidator.required]),
+      oee: new FormControl("", [
+        MimsValidator.required,
+        MimsValidator.min(1),
+        MimsValidator.max(1000),
+      ]),
+      mde: new FormControl("", [
+        MimsValidator.required,
+        MimsValidator.isNumber,
+        MimsValidator.min(1),
+        MimsValidator.max(60),
+      ]),
     });
   }
-  protected get machine(): AbstractControl { return this.machinesForm.get('machine'); }
-  protected get operation(): AbstractControl { return this.machinesForm.get('operation'); }
-  protected get oee(): AbstractControl { return this.machinesForm.get('oee'); }
-  protected get mde(): AbstractControl { return this.machinesForm.get('mde'); }
+  protected get machine(): AbstractControl {
+    return this.machinesForm.get("machine");
+  }
+  protected get operation(): AbstractControl {
+    return this.machinesForm.get("operation");
+  }
+  protected get oee(): AbstractControl {
+    return this.machinesForm.get("oee");
+  }
+  protected get mde(): AbstractControl {
+    return this.machinesForm.get("mde");
+  }
   protected get machineSelectedId(): number | string {
-    const machineSelectedId = this.machinesForm.get('machine').value as any as MimsSelectBoxModel;
+    const machineSelectedId = this.machinesForm.get("machine")
+      .value as any as MimsSelectBoxModel;
     return machineSelectedId.value;
   }
   protected get operationSelectedId(): number | string {
-    const machineSelectedId = this.machinesForm.get('operation').value as any as MimsSelectBoxModel;
+    const machineSelectedId = this.machinesForm.get("operation")
+      .value as any as MimsSelectBoxModel;
     return machineSelectedId.value;
   }
 
@@ -48,8 +82,8 @@ export class MachineWizardComponent {
         MachineId: this.machineSelectedId as number,
         OperationId: this.operationSelectedId as number,
         OEE: this.oee.value as number,
-        MDE: this.mde.value as number
-    };
+        MDE: this.mde.value as number,
+      };
       this.addMachine.emit(addedMachine);
       this.errors = [];
     } else {
@@ -63,12 +97,17 @@ export class MachineWizardComponent {
 
   private getFormErrors(): void {
     const formControlNameAlias = {
-      machine: 'Machines',
-      operation: 'Operations',
-      oee: 'OEE',
-      mde: 'MDE'
+      machine: "Machines",
+      operation: "Operations",
+      oee: "OEE",
+      mde: "MDE",
     };
-    const errors = this.formErrorService.getFormGroupValidationErrors(this.machinesForm);
-    this.errors = this.formErrorService.displayFormErrors(formControlNameAlias, errors);
+    const errors = this.formErrorService.getFormGroupValidationErrors(
+      this.machinesForm
+    );
+    this.errors = this.formErrorService.displayFormErrors(
+      formControlNameAlias,
+      errors
+    );
   }
 }
