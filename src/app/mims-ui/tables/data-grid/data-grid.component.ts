@@ -9,6 +9,7 @@ import {
 import { DataGridCellModel } from "./models/data-grid-cell.model";
 
 @Component({
+  standalone: false,
   selector: "mims-data-grid",
   templateUrl: "./data-grid.component.html",
   styleUrls: ["./data-grid.component.css"],

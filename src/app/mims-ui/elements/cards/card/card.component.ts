@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 // TODO: for now is using solid button
 
 @Component({
+  standalone: false,
   selector: "mims-card",
   templateUrl: "./card.component.html",
   styleUrls: ["./card.component.css"],

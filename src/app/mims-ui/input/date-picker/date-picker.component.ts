@@ -16,6 +16,7 @@ import {
 } from "@angular/forms";
 
 @Component({
+  standalone: false,
   selector: "mims-date-picker",
   templateUrl: "./date-picker.component.html",
   providers: [

@@ -8,6 +8,7 @@ import {
 import { MimsUiUtilsService } from "../../mims-ui.utils.service";
 
 @Component({
+  standalone: false,
   selector: "mims-gauge-chart",
   templateUrl: "./gauge-chart.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,

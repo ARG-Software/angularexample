@@ -12,6 +12,7 @@ import { CommonNavigationService } from "@mimsUI/navigation/common/services/navi
 import { SideBarItemModel } from "@mimsUI/navigation/vertical-nav/models/item.model";
 
 @Component({
+  standalone: false,
   selector: "mims-vertical-nav",
   templateUrl: "./vertical-nav.component.html",
   styleUrls: ["./vertical-nav.component.css"],

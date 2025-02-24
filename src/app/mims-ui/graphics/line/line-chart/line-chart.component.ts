@@ -9,6 +9,7 @@ import {
 import { MimsUiUtilsService } from "@mimsUI/mims-ui.utils.service";
 
 @Component({
+  standalone: false,
   selector: "mims-line-chart",
   templateUrl: "./line-chart.component.html",
   styleUrls: ["./line-chart.component.css"],

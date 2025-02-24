@@ -22,6 +22,7 @@ import {
 } from "@angular/forms";
 
 @Component({
+  standalone: false,
   selector: "mims-select-box",
   templateUrl: "./select-box.component.html",
   providers: [

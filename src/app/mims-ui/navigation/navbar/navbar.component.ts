@@ -13,6 +13,7 @@ import { NavBarSettingsModel } from "@mimsUI/navigation/navbar/models/navbar-set
 import { Subscription } from "rxjs";
 
 @Component({
+  standalone: false,
   selector: "mims-navbar",
   templateUrl: "./navbar.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -8,6 +8,7 @@ import {
 import { MimsUiUtilsService } from "../../../mims-ui.utils.service";
 
 @Component({
+  standalone: false,
   selector: "mims-vertical-bar-chart",
   templateUrl: "./vertical-bar-chart.component.html",
   styleUrls: ["./vertical-bar-chart.component.css"],

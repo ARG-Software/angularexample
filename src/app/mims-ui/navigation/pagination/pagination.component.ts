@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'mims-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  standalone: false,
+  selector: "mims-pagination",
+  templateUrl: "./pagination.component.html",
+  styleUrls: ["./pagination.component.css"],
 })
 export class PaginationComponent implements OnInit {
   @Input()
@@ -65,11 +66,11 @@ export class PaginationComponent implements OnInit {
   }
 
   public hasPrevious(): boolean {
-    return (this.page > 1);
+    return this.page > 1;
   }
 
   public hasNext(): boolean {
-    return (this.page < this.totalPages);
+    return this.page < this.totalPages;
   }
 
   public get middlePages(): number[] {
@@ -91,5 +92,4 @@ export class PaginationComponent implements OnInit {
   private setPage(p: number) {
     this._page = Math.min(1, Math.max(this.totalPages, p));
   }
-
 }

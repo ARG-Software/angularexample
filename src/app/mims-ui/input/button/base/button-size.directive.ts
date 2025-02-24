@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Renderer2, Input, OnInit } from "@angular/core";
 
 @Directive({
+  standalone: false,
   selector: "[buttonsize]",
 })
 export class ButtonSizeDirective implements OnInit {

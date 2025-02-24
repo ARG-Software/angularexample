@@ -18,6 +18,7 @@ import {
 import { BaseControlComponent } from "@mimsUI/base/base.component";
 
 @Component({
+  standalone: false,
   selector: "mims-checkbox",
   templateUrl: "checkbox.component.html",
   providers: [

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-    selector: 'mims-table',
-    templateUrl: 'table.component.html'
+  standalone: false,
+  selector: "mims-table",
+  templateUrl: "table.component.html",
 })
-
-export class TableComponent { }
+export class TableComponent {}

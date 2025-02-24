@@ -17,6 +17,7 @@ import {
 import { BaseControlComponent } from "@mimsUI/base/base.component";
 
 @Component({
+  standalone: false,
   selector: "mims-input",
   templateUrl: "./input.component.html",
   providers: [

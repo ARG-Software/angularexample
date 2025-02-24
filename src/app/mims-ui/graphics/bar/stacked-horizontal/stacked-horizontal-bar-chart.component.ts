@@ -8,6 +8,7 @@ import {
 import { MimsUiUtilsService } from "../../../mims-ui.utils.service";
 
 @Component({
+  standalone: false,
   selector: "mims-stacked-horizontal-bar-chart",
   styleUrls: ["stacked-horizontal-bar-chart.component.css"],
   templateUrl: "stacked-horizontal-bar-chart.component.html",

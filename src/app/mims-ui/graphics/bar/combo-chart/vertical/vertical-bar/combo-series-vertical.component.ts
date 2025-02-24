@@ -10,6 +10,7 @@ import {
 import { formatLabel } from "@swimlane/ngx-charts";
 
 @Component({
+  standalone: false,
   selector: "g[ngx-combo-charts-series-vertical]",
   templateUrl: "combo-series-vertical.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
