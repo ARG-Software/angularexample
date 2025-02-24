@@ -3,6 +3,8 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 
 export const reducerName = "auth";
 
+export type AuthState = fromAuthReducerDefinition.AuthState;
+
 export const reducers = fromAuthReducerDefinition.reducer;
 
 const selectAuthState =

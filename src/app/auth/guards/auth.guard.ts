@@ -6,7 +6,8 @@ import {
 } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
+import { switchMap, catchError, take } from "rxjs/operators";
 import * as fromModule from "../auth.reducers.index";
 import { Logout } from "../actions/auth.actions";
 
@@ -14,18 +15,10 @@ import { Logout } from "../actions/auth.actions";
 export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private store: Store<fromModule.AuthState>) {}
 
-  /**
-   * Validate if can activate route.
-   */
   public canActivate(): Observable<boolean> {
     return this.userIsAuthorizedToNavigate();
   }
 
-  /**
-   * Validate if can activate child route.
-   * @param childRoute
-   * @param state
-   */
   public canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -33,27 +26,25 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.userIsAuthorizedToNavigate();
   }
 
-  private userIsAuthorizedToNavigate(): Observable<any> {
-    return this.userIsAuthorized()
-      .switchMap((authorized) => {
-        if (authorized === false) {
+  private userIsAuthorizedToNavigate(): Observable<boolean> {
+    return this.userIsAuthorized().pipe(
+      switchMap((authorized) => {
+        if (!authorized) {
           this.logout();
         }
-        return Observable.of(authorized);
-      })
-      .catch(() => {
+        return of(authorized);
+      }),
+      catchError(() => {
         this.logout();
-        return Observable.of(false);
-      });
+        return of(false);
+      })
+    );
   }
 
-  private userIsAuthorized(): Observable<any> {
-    return this.store.select(fromModule.getUserAuthorization).take(1);
+  private userIsAuthorized(): Observable<boolean> {
+    return this.store.select(fromModule.getUserAuthorization).pipe(take(1));
   }
 
-  /**
-   * Logout
-   */
   private logout(): void {
     this.store.dispatch(new Logout({}));
   }

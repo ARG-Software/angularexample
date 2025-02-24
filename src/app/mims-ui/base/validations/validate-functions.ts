@@ -63,7 +63,7 @@ export const message = (validator: ValidationResult, key: string): string => {
       if (
         typeof validationValue === "object" &&
         validationValue !== null &&
-        "requiredLength" in validationValue
+        Object.prototype.hasOwnProperty.call(validationValue, "requiredLength")
       ) {
         return `Value must be ${key === "minlength" ? "at least" : "at most"} ${
           (validationValue as { requiredLength: number }).requiredLength
