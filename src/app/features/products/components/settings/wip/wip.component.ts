@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { WipDataModelUI } from "../../../models/settings.models";
 
 @Component({
+  standalone: false,
   selector: "wip",
   templateUrl: "./wip.component.html",
   styleUrls: ["./wip.component.css"],

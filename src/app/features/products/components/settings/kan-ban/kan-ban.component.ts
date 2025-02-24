@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { KanbanDataModelUI } from "../../../models/settings.models";
 
 @Component({
+  standalone: false,
   selector: "kan-ban",
   templateUrl: "./kan-ban.component.html",
   styleUrls: ["./kan-ban.component.css"],

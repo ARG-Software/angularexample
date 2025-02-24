@@ -9,6 +9,7 @@ import * as fromReducer from "./main.reducers.index";
  * The Main Component
  */
 @Component({
+  standalone: false,
   templateUrl: "./main.component.html",
   styleUrls: ["./main.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
