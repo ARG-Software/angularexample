@@ -17,6 +17,7 @@ import { LoginModelUI } from "../models/auth.models";
 import { Observable } from "rxjs";
 
 @Component({
+  standalone: false,
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"],
   encapsulation: ViewEncapsulation.None,
