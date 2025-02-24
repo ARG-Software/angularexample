@@ -12,6 +12,7 @@ import {
 import { PagingModelUI } from "src/app/app.models";
 
 @Component({
+  standalone: false,
   selector: "downtime-information",
   templateUrl: "./downtime-information.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,

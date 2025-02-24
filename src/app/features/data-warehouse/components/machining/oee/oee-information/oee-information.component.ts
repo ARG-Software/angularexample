@@ -12,6 +12,7 @@ import {
 import { PagingModelUI } from "src/app/app.models";
 
 @Component({
+  standalone: false,
   selector: "oee-information",
   templateUrl: "./oee-information.component.html",
   styleUrls: ["./oee-information.component.css"],

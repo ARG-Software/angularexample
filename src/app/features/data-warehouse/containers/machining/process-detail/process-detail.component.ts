@@ -17,6 +17,7 @@ import { getTodayDateMinusInputDays } from "../../../../../utils/funtion.utils";
 import { PagingModelUI } from "src/app/app.models";
 
 @Component({
+  standalone: false,
   selector: "process-detail",
   templateUrl: "./process-detail.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,

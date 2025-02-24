@@ -12,6 +12,7 @@ import { MimsSelectBoxModel } from "@mimsUI/input/select-box/models/select-box.m
 import { MachiningFilterModelUI } from "../../../../models/downtime.models";
 
 @Component({
+  standalone: false,
   selector: "oee-filter-box",
   templateUrl: "oee-filter-box.component.html",
   styleUrls: ["./oee-filter-box.component.css"],

@@ -11,6 +11,7 @@ import { MimsSelectBoxModel } from "@mimsUI/input/select-box/models/select-box.m
 import { MachiningFilterModelUI } from "../../../../models/downtime.models";
 
 @Component({
+  standalone: false,
   selector: "downtime-filter-box",
   styleUrls: ["downtime-filter-box.component.css"],
   templateUrl: "downtime-filter-box.component.html",

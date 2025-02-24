@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-      templateUrl: 'data-warehouse.component.html'
+  standalone: false,
+  templateUrl: "data-warehouse.component.html",
 })
-export class DataWarehouseComponent { }
+export class DataWarehouseComponent {}

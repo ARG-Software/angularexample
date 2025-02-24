@@ -17,6 +17,7 @@ import { MachiningRequestModelUI } from "../../../models/downtime.models";
 import { PagingModelUI } from "src/app/app.models";
 
 @Component({
+  standalone: false,
   selector: "downtime",
   templateUrl: "./downtime.component.html",
   styleUrls: ["./downtime.component.css"],

@@ -16,6 +16,7 @@ import { PagingModelUI } from "src/app/app.models";
 import { Observable } from "rxjs";
 
 @Component({
+  standalone: false,
   selector: "oee",
   templateUrl: "./oee.component.html",
   styleUrls: ["./oee.component.css"],

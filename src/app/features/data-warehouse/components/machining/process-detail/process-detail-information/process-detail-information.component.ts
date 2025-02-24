@@ -12,6 +12,7 @@ import {
 import { PagingModelUI } from "src/app/app.models";
 
 @Component({
+  standalone: false,
   selector: "process-detail-information",
   templateUrl: "./process-detail-information.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
