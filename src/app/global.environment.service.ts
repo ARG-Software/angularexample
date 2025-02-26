@@ -1,21 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from "@angular/core";
+import { APP_CONFIG, IAppConfig } from "./app.config";
 
 export enum Environment {
   Dev = 1,
   Prod = 2,
 }
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class GlobalEnvironmentService {
-  public getEnvironment(): Environment {
-    const environment = process.env['ENV'];
-    if (environment === 'development') {
-      return Environment.Dev;
-    }
-    return Environment.Prod;
+  constructor(@Inject(APP_CONFIG) private readonly config: IAppConfig) {}
+
+  public getEnv(): Environment {
+    return this.config.env === "development"
+      ? Environment.Dev
+      : Environment.Prod;
   }
 
-  public getApiUrl() {
-    return process.env['API_URL'];
+  public getApiUrl(): string {
+    return this.config.apiUrl;
   }
 }
