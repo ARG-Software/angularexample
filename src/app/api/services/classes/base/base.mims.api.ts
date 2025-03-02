@@ -1,20 +1,20 @@
 import { GlobalEnvironmentService } from "./../../../../global.environment.service";
-import { Injector } from "@angular/core";
+import { Injectable } from "@angular/core";
 import * as MimsModels from "../../../models/apimodels";
 import { Observable, throwError } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { map, catchError } from "rxjs/operators";
 
+@Injectable()
 export class BaseMimsApi {
   private baseHttp: HttpClient;
-  private baseInjector: Injector;
   private apiUrl: string;
-  private serverSettings: GlobalEnvironmentService;
 
-  constructor(injector: Injector, http: HttpClient) {
+  constructor(
+    protected http: HttpClient,
+    protected serverSettings: GlobalEnvironmentService
+  ) {
     this.baseHttp = http;
-    this.baseInjector = injector;
-    this.serverSettings = this.baseInjector.get(GlobalEnvironmentService);
     this.apiUrl = this.serverSettings.getApiUrl();
   }
 

@@ -1,8 +1,9 @@
 import { BaseMimsApi } from "../../../classes/base/base.mims.api";
-import { Injectable, Injector } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { IProcessDetailMachiningService } from "../../../interfaces/core/data-warehouse/iprocess-detail.service";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { GlobalEnvironmentService } from "src/app/global.environment.service";
 
 @Injectable()
 export class ProcessDetailMachiningService
@@ -10,8 +11,12 @@ export class ProcessDetailMachiningService
   implements IProcessDetailMachiningService
 {
   private controllerRoute = "Process-Detail";
-  constructor(private injector: Injector, private http: HttpClient) {
-    super(injector, http);
+
+  constructor(
+    protected http: HttpClient,
+    protected serverSettings: GlobalEnvironmentService
+  ) {
+    super(http, serverSettings);
   }
 
   public GetProcessDetailData(obj: any): Observable<any> {

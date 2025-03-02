@@ -1,9 +1,10 @@
 import { BaseMimsApi } from "../../../classes/base/base.mims.api";
-import { Injectable, Injector } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { IDownTimeMachiningService } from "../../../interfaces/core/data-warehouse/idowntime.service";
 import { IMachineDowntimeScreenDto } from "../../../../models/apimodels";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { GlobalEnvironmentService } from "src/app/global.environment.service";
 
 @Injectable()
 export class DowntimeMachiningService
@@ -12,8 +13,11 @@ export class DowntimeMachiningService
 {
   private controllerRoute = "DataWarehouse/graphics";
 
-  constructor(private injector: Injector, private http: HttpClient) {
-    super(injector, http);
+  constructor(
+    protected http: HttpClient,
+    protected serverSettings: GlobalEnvironmentService
+  ) {
+    super(http, serverSettings);
   }
 
   public GetDownTimeData(obj: any): Observable<IMachineDowntimeScreenDto> {

@@ -1,9 +1,10 @@
 import { BaseMimsApi } from "../../classes/base/base.mims.api";
-import { Injectable, Injector } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { ISubcontractorsDto } from "../../../models/apimodels";
 import { Observable } from "rxjs";
 import { ISubcontractorService } from "@api/services/interfaces/core/isubcontractor.service";
 import { HttpClient } from "@angular/common/http";
+import { GlobalEnvironmentService } from "src/app/global.environment.service";
 
 @Injectable()
 export class SubcontractorService
@@ -12,8 +13,11 @@ export class SubcontractorService
 {
   private controllerRoute = "Subcontractor";
 
-  constructor(private injector: Injector, private http: HttpClient) {
-    super(injector, http);
+  constructor(
+    protected http: HttpClient,
+    protected serverSettings: GlobalEnvironmentService
+  ) {
+    super(http, serverSettings);
   }
 
   public GetSubcontractors(): Observable<ISubcontractorsDto[]> {

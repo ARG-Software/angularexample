@@ -1,9 +1,10 @@
-import { Injectable, Injector } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BaseMimsApi } from "../../classes/base/base.mims.api";
 import { IAuthorizationService } from "../..//interfaces/core/iauthorization.service";
 import * as MimsModels from "../../../models/apimodels";
 import { HttpClient } from "@angular/common/http";
+import { GlobalEnvironmentService } from "src/app/global.environment.service";
 
 @Injectable()
 export class AuthorizationService
@@ -12,8 +13,11 @@ export class AuthorizationService
 {
   private controllerRoute = "auth";
 
-  constructor(private injector: Injector, private http: HttpClient) {
-    super(injector, http);
+  constructor(
+    protected http: HttpClient,
+    protected serverSettings: GlobalEnvironmentService
+  ) {
+    super(http, serverSettings);
   }
 
   /** Method to do the login.
